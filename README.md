@@ -120,7 +120,7 @@ results and checks that the SCL export matches the ST source.
 - The wall thickness was chosen so that the cycle meets the public 45 to 50 s band. The demoulding temperature is
   assumed. The thermal diffusivity is computed from room-temperature datasheet values.
 - Cell layout, floor space, machine times, production hours and OEE are assumed.
-- The ST code was compiled with matiec and run in the loop. The SCL export was not compiled in TIA Portal. The LS
+- The ST code was compiled with matiec and run in the loop. The SCL export compiles in TIA Portal V18 for an S7-1513 with 0 errors and 14 warnings (`scripts/tia_build.ps1`, record in `results/tia_compile.txt`); the warnings are all of the kind "output parameter might not be initialized", because the block reads back its own outputs. It was not run on a PLC or in PLCSIM. The LS
   program was run only by the interpreter in this repository, not by a robot controller or its simulator.
 - EN 201, EN ISO 10218-2 and EN ISO 13849-1 are paywalled. They were not read; only the public sources named in
   the dossier were. A real cell needs the standards, a risk assessment and a validated safety controller.

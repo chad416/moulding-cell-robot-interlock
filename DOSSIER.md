@@ -459,7 +459,7 @@ Effects are the checker results of §8.3 for variant A.
 | Timed run | no alarm, removal time within the budget, states inside the model | `tests/test_model.py` |
 | PLC watchdog | scan sequence on the compiled block | `tests/test_model.py` |
 
-Validation against hardware: none. Not done: compiling the SCL export in TIA Portal, running the LS program on a
+Validation against hardware: none. Done: the SCL export compiles in TIA Portal V18 with 0 errors (`results/tia_compile.txt`). Not done: running the LS program on a
 robot controller or its simulator, any test on a machine.
 
 ## 12. Assumed versus sourced, and limits
