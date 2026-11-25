@@ -137,9 +137,11 @@ results and checks that the SCL export matches the ST source.
 - The ST code was compiled with matiec and run in the loop. The SCL export compiles in TIA Portal V18 for an
   S7-1513 with 0 errors and 0 warnings (`scripts/tia_build.ps1`, record in `results/tia_compile.txt`). The
   test project with the self-checking bench compiles there too and is saved as a project archive
-  (`results/tia_compile_testbench.txt`). The bench passes against the matiec build in CI. It has not been run in
-  PLCSIM or on a PLC by this repository; [docs/PLCSIM_RUN.md](docs/PLCSIM_RUN.md) says how to run it and which values
-  mean pass. The LS program was run only by the interpreter in this repository. It was not
+  (`results/tia_compile_testbench.txt`). The bench passes against the matiec build in CI. It was run in
+  S7-PLCSIM Advanced V7.0 Upd1 under TIA Portal V20 Update 7, which upgraded the project from V18: 7 of 7 bench
+  cases passed ([docs/PLCSIM_RUN.md](docs/PLCSIM_RUN.md) has the record, the observed values and the screenshots).
+  The bench is an open-loop replay of recorded signal tables on a simulated CPU; the block has not been run on a
+  real PLC. The LS program was run only by the interpreter in this repository. It was not
   compiled with the robot maker's offline compiler and not run on a robot controller or its simulator.
 - EN 201, EN ISO 10218-2 and EN ISO 13849-1 are paywalled. They were not read; only the public sources named in
   the dossier were. A real cell needs the standards, a risk assessment and a validated safety controller.

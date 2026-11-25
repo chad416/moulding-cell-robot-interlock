@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1 (2026-11-25)
+- Test bench run in S7-PLCSIM Advanced V7.0 Upd1 under TIA Portal V20 Update 7 (project upgraded from V18; two CPU
+  protection settings set by hand so that the hardware compiles): 7 of 7 cases passed. Record, observed values and
+  screenshots in `docs/PLCSIM_RUN.md`.
+- `scripts/make_testbench.py` keeps the hand-written result section of `docs/PLCSIM_RUN.md` when it writes the page.
+
 ## 1.1.0 (2026-11-25)
 - Self-checking PLC test bench for PLCSIM (`plc/test`): seven cases, tables generated from the cell model,
   result data block `DB_TestResult`. Runs against the matiec build in CI; a broken expectation is shown to fail.

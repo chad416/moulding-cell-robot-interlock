@@ -462,7 +462,9 @@ Effects are the checker results of §8.3 for variant A.
 
 Validation against hardware: none. Done: the SCL export compiles in TIA Portal V18 with 0 errors and 0 warnings
 (`results/tia_compile.txt`). The test project with the bench compiles and is archived for PLCSIM
-(`results/tia_compile_testbench.txt`); the PLCSIM run itself is not part of this repository yet. Not done: compiling the LS program with the robot maker's offline
+(`results/tia_compile_testbench.txt`). That project was upgraded to TIA Portal V20 and run in S7-PLCSIM Advanced
+V7.0 Upd1: 7 of 7 bench cases passed (`docs/PLCSIM_RUN.md`). The bench is an open-loop replay on a simulated CPU, so
+this is a second compiler agreeing with the first, not a test on hardware. Not done: compiling the LS program with the robot maker's offline
 compiler, running it on a robot controller or its simulator, any test on a machine.
 
 ## 12. Assumed versus sourced, and limits
