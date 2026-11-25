@@ -1,0 +1,72 @@
+name: ci
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  # matiec (IEC 61131-3 compiler of the Beremiz / OpenPLC projects), pinned
+  MATIEC_REPO: https://github.com/beremiz/matiec.git
+  MATIEC_REF: c316fe57e335381cbe91f61c7366857198580ac7
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Cache matiec
+        id: matiec
+        uses: actions/cache@v4
+        with:
+          path: ~/matiec
+          key: matiec-${{ env.MATIEC_REF }}
+      - name: Build matiec
+        if: steps.matiec.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get install -y -qq bison flex autoconf automake libtool
+          git clone -q "$MATIEC_REPO" ~/matiec
+          cd ~/matiec && git checkout -q "$MATIEC_REF"
+          autoreconf -i && ./configure && make -j4
+      - name: Compile the ST controller (matiec -> C -> shared library)
+        run: PYTHON=python bash scripts/build_plc.sh
+      - name: Physics, interface and model tests
+        run: python -m pytest -q -rs
+      - name: SCL export is up to date with the ST source
+        run: |
+          python plc/st_to_scl.py plc/st/cell_plc.st /tmp/CellPlc.scl
+          diff <(tr -d '\r' < /tmp/CellPlc.scl) <(tr -d '\r' < plc/scl/CellPlc.scl)
+      - name: Full study and checks on its output
+        run: |
+          python -m scripts.run_studies
+          python - <<'PY'
+          import json
+          d = json.load(open("results/studies.json"))
+          m = d["model"]["variants"]
+          assert len(m["A"]["scenarios"]) == 45 and m["A"]["P1_scenarios"] == [], m["A"]["P1_scenarios"]
+          assert sorted(m["A"]["P2_scenarios"]) == ["MOULD_OPEN_stuck_high", "ZA7_stuck_high"]
+          assert sorted(m["B"]["P1_scenarios"]) == ["A6_stuck_high", "plc_power_loss_A6_high"]
+          assert m["C"]["P1_scenarios"] == ["none"] and m["D"]["P1_scenarios"] == []
+          live = d["model"]["liveness"]
+          assert live["can_reach_next_shot"] == live["states"] and live["deadlocks"] == 0
+          t = d["timed"]["side_6axis"]
+          assert not t["alarm"] and not t["p1_seen"] and not t["p2_seen"]
+          assert abs(t["removal_s"] - t["removal_budget_s"]) < 0.03
+          assert t["observable_states_in_model"] == t["observable_states"]
+          a = d["physics"]["alternatives"]
+          assert a["top_linear"]["removal_s"] < a["side_6axis"]["removal_s"] < a["top_6axis"]["removal_s"]
+          assert 45.0 <= a["side_6axis"]["cycle_s"] <= 50.0
+          print("study checks passed")
+          PY
+      - name: Figures and tables can be rebuilt
+        run: |
+          python -m scripts.make_figures
+          python -m scripts.make_tables
+      - uses: actions/upload-artifact@v4
+        with:
+          name: results
+          path: results/

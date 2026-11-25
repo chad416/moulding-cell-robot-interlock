@@ -1,0 +1,181 @@
+=== variant A (design: Mould area free contact used, A6 gated by the PLC, four-phase program)
+=== scenario: ZA7_stuck_high (Mould open position (ZA7) stuck HIGH; also covers a lost edge)
+=== shortest path to a P2 state: 20 steps (each line shows the state after the step and the next robot instruction)
+  0 init                         mould CLOSED   ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  1 imm:process_done             mould CLOSED   ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  2 imm:open_start               mould OPENING  ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  3 rob:instr                    mould OPENING  ej BACK | robot HOME               line 9: DO[2:REQ_EJ_FWD]=OFF                          | PLC S_INIT
+  4 rob:instr                    mould OPENING  ej BACK | robot HOME               line 10: DO[3:REQ_EJ_BACK]=OFF                        | PLC S_INIT
+  5 rob:instr                    mould OPENING  ej BACK | robot HOME               line 11: DO[4:AT_CUT]=OFF                             | PLC S_INIT
+  6 rob:instr                    mould OPENING  ej BACK | robot HOME               line 12: DO[5:PLACED]=OFF                             | PLC S_INIT
+  7 rob:instr                    mould OPENING  ej BACK | robot HOME               line 13: DO[6:FAULT]=OFF                              | PLC S_INIT
+  8 rob:instr                    mould OPENING  ej BACK | robot HOME               line 14: DO[7:AT_WAIT]=OFF                            | PLC S_INIT
+  9 rob:instr                    mould OPENING  ej BACK | robot HOME               line 15: J PR[2:WAIT_IMM] 100% FINE                   | PLC S_INIT
+ 10 rob:move_start               mould OPENING  ej BACK | robot HOME>WAIT_IMM      line 15: J PR[2:WAIT_IMM] 100% FINE                   | PLC S_INIT
+ 11 rob:move_done                mould OPENING  ej BACK | robot WAIT_IMM           line 17: IF DI[8:CYCLE_ENABLE]=ON,JMP LBL[2]          | PLC S_INIT
+ 12 plc:scan                     mould OPENING  ej BACK | robot WAIT_IMM           line 17: IF DI[8:CYCLE_ENABLE]=ON,JMP LBL[2]          | PLC S_MOULDING
+ 13 rob:instr                    mould OPENING  ej BACK | robot WAIT_IMM           line 24: WAIT DI[1:IMM_AUTO]=ON                       | PLC S_MOULDING
+ 14 rob:wait_ok                  mould OPENING  ej BACK | robot WAIT_IMM           line 25: WAIT (DI[2:MOULD_OPEN]=ON OR DI[8:CYCLE_ENABLE]=OFF) | PLC S_MOULDING
+ 15 fault:ZA7_stuck_high         mould OPENING  ej BACK | robot WAIT_IMM           line 25: WAIT (DI[2:MOULD_OPEN]=ON OR DI[8:CYCLE_ENABLE]=OFF) | PLC S_MOULDING
+ 16 plc:scan                     mould OPENING  ej BACK | robot WAIT_IMM           line 25: WAIT (DI[2:MOULD_OPEN]=ON OR DI[8:CYCLE_ENABLE]=OFF) | PLC S_OPEN
+ 17 rob:wait_ok                  mould OPENING  ej BACK | robot WAIT_IMM           line 26: IF DI[8:CYCLE_ENABLE]=OFF,JMP LBL[1]         | PLC S_OPEN
+ 18 rob:instr                    mould OPENING  ej BACK | robot WAIT_IMM           line 28: IF DI[2:MOULD_OPEN]=OFF,JMP LBL[1]           | PLC S_OPEN
+ 19 rob:instr                    mould OPENING  ej BACK | robot WAIT_IMM           line 31: L PR[3:MOULD_IN] 2000mm/sec FINE             | PLC S_OPEN
+ 20 rob:move_start               mould OPENING  ej BACK | robot WAIT_IMM>MOULD_IN  line 31: L PR[3:MOULD_IN] 2000mm/sec FINE             | PLC S_OPEN  <-- P2
+
+=== variant A (design: Mould area free contact used, A6 gated by the PLC, four-phase program)
+=== scenario: MOULD_OPEN_stuck_high (mould open, enter (DI[2]) stuck HIGH; also covers a lost edge)
+=== shortest path to a P2 state: 17 steps (each line shows the state after the step and the next robot instruction)
+  0 init                         mould CLOSED   ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  1 rob:instr                    mould CLOSED   ej BACK | robot HOME               line 9: DO[2:REQ_EJ_FWD]=OFF                          | PLC S_INIT
+  2 rob:instr                    mould CLOSED   ej BACK | robot HOME               line 10: DO[3:REQ_EJ_BACK]=OFF                        | PLC S_INIT
+  3 rob:instr                    mould CLOSED   ej BACK | robot HOME               line 11: DO[4:AT_CUT]=OFF                             | PLC S_INIT
+  4 rob:instr                    mould CLOSED   ej BACK | robot HOME               line 12: DO[5:PLACED]=OFF                             | PLC S_INIT
+  5 rob:instr                    mould CLOSED   ej BACK | robot HOME               line 13: DO[6:FAULT]=OFF                              | PLC S_INIT
+  6 rob:instr                    mould CLOSED   ej BACK | robot HOME               line 14: DO[7:AT_WAIT]=OFF                            | PLC S_INIT
+  7 rob:instr                    mould CLOSED   ej BACK | robot HOME               line 15: J PR[2:WAIT_IMM] 100% FINE                   | PLC S_INIT
+  8 rob:move_start               mould CLOSED   ej BACK | robot HOME>WAIT_IMM      line 15: J PR[2:WAIT_IMM] 100% FINE                   | PLC S_INIT
+  9 rob:move_done                mould CLOSED   ej BACK | robot WAIT_IMM           line 17: IF DI[8:CYCLE_ENABLE]=ON,JMP LBL[2]          | PLC S_INIT
+ 10 plc:scan                     mould CLOSED   ej BACK | robot WAIT_IMM           line 17: IF DI[8:CYCLE_ENABLE]=ON,JMP LBL[2]          | PLC S_MOULDING
+ 11 rob:instr                    mould CLOSED   ej BACK | robot WAIT_IMM           line 24: WAIT DI[1:IMM_AUTO]=ON                       | PLC S_MOULDING
+ 12 rob:wait_ok                  mould CLOSED   ej BACK | robot WAIT_IMM           line 25: WAIT (DI[2:MOULD_OPEN]=ON OR DI[8:CYCLE_ENABLE]=OFF) | PLC S_MOULDING
+ 13 fault:MOULD_OPEN_stuck_high  mould CLOSED   ej BACK | robot WAIT_IMM           line 25: WAIT (DI[2:MOULD_OPEN]=ON OR DI[8:CYCLE_ENABLE]=OFF) | PLC S_MOULDING
+ 14 rob:wait_ok                  mould CLOSED   ej BACK | robot WAIT_IMM           line 26: IF DI[8:CYCLE_ENABLE]=OFF,JMP LBL[1]         | PLC S_MOULDING
+ 15 rob:instr                    mould CLOSED   ej BACK | robot WAIT_IMM           line 28: IF DI[2:MOULD_OPEN]=OFF,JMP LBL[1]           | PLC S_MOULDING
+ 16 rob:instr                    mould CLOSED   ej BACK | robot WAIT_IMM           line 31: L PR[3:MOULD_IN] 2000mm/sec FINE             | PLC S_MOULDING
+ 17 rob:move_start               mould CLOSED   ej BACK | robot WAIT_IMM>MOULD_IN  line 31: L PR[3:MOULD_IN] 2000mm/sec FINE             | PLC S_MOULDING  <-- P2
+
+=== variant B (as A, but the Mould area free contact is bridged at the machine)
+=== scenario: A6_stuck_high (Enable mould closure (A6) stuck HIGH; also covers a lost edge)
+=== shortest path to a P1 state: 39 steps (each line shows the state after the step and the next robot instruction)
+  0 init                         mould CLOSED   ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  1 imm:process_done             mould CLOSED   ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  2 imm:open_start               mould OPENING  ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  3 imm:open_done                mould OPEN     ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  4 rob:instr                    mould OPEN     ej BACK | robot HOME               line 9: DO[2:REQ_EJ_FWD]=OFF                          | PLC S_INIT
+  5 rob:instr                    mould OPEN     ej BACK | robot HOME               line 10: DO[3:REQ_EJ_BACK]=OFF                        | PLC S_INIT
+  6 rob:instr                    mould OPEN     ej BACK | robot HOME               line 11: DO[4:AT_CUT]=OFF                             | PLC S_INIT
+  7 rob:instr                    mould OPEN     ej BACK | robot HOME               line 12: DO[5:PLACED]=OFF                             | PLC S_INIT
+  8 rob:instr                    mould OPEN     ej BACK | robot HOME               line 13: DO[6:FAULT]=OFF                              | PLC S_INIT
+  9 rob:instr                    mould OPEN     ej BACK | robot HOME               line 14: DO[7:AT_WAIT]=OFF                            | PLC S_INIT
+ 10 rob:instr                    mould OPEN     ej BACK | robot HOME               line 15: J PR[2:WAIT_IMM] 100% FINE                   | PLC S_INIT
+ 11 rob:move_start               mould OPEN     ej BACK | robot HOME>WAIT_IMM      line 15: J PR[2:WAIT_IMM] 100% FINE                   | PLC S_INIT
+ 12 rob:move_done                mould OPEN     ej BACK | robot WAIT_IMM           line 17: IF DI[8:CYCLE_ENABLE]=ON,JMP LBL[2]          | PLC S_INIT
+ 13 plc:scan                     mould OPEN     ej BACK | robot WAIT_IMM           line 17: IF DI[8:CYCLE_ENABLE]=ON,JMP LBL[2]          | PLC S_MOULDING
+ 14 rob:instr                    mould OPEN     ej BACK | robot WAIT_IMM           line 24: WAIT DI[1:IMM_AUTO]=ON                       | PLC S_MOULDING
+ 15 rob:wait_ok                  mould OPEN     ej BACK | robot WAIT_IMM           line 25: WAIT (DI[2:MOULD_OPEN]=ON OR DI[8:CYCLE_ENABLE]=OFF) | PLC S_MOULDING
+ 16 plc:scan                     mould OPEN     ej BACK | robot WAIT_IMM           line 25: WAIT (DI[2:MOULD_OPEN]=ON OR DI[8:CYCLE_ENABLE]=OFF) | PLC S_OPEN
+ 17 rob:wait_ok                  mould OPEN     ej BACK | robot WAIT_IMM           line 26: IF DI[8:CYCLE_ENABLE]=OFF,JMP LBL[1]         | PLC S_OPEN
+ 18 rob:instr                    mould OPEN     ej BACK | robot WAIT_IMM           line 28: IF DI[2:MOULD_OPEN]=OFF,JMP LBL[1]           | PLC S_OPEN
+ 19 rob:instr                    mould OPEN     ej BACK | robot WAIT_IMM           line 31: L PR[3:MOULD_IN] 2000mm/sec FINE             | PLC S_OPEN
+ 20 rob:move_start               mould OPEN     ej BACK | robot WAIT_IMM>MOULD_IN  line 31: L PR[3:MOULD_IN] 2000mm/sec FINE             | PLC S_OPEN
+ 21 rob:move_done                mould OPEN     ej BACK | robot MOULD_IN           line 32: L PR[4:GRIP] 500mm/sec FINE                  | PLC S_OPEN
+ 22 rob:move_start               mould OPEN     ej BACK | robot MOULD_IN>GRIP      line 32: L PR[4:GRIP] 500mm/sec FINE                  | PLC S_OPEN
+ 23 rob:move_done                mould OPEN     ej BACK | robot GRIP               line 33: RO[1:VACUUM]=ON                              | PLC S_OPEN
+ 24 rob:instr                    mould OPEN     ej BACK | robot GRIP               line 34: DO[2:REQ_EJ_FWD]=ON                          | PLC S_OPEN
+ 25 rob:instr                    mould OPEN     ej BACK | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_OPEN
+ 26 cell:part_gripped            mould OPEN     ej BACK | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_OPEN
+ 27 plc:scan                     mould OPEN     ej BACK | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_UNLOAD
+ 28 imm:ej_fwd_done              mould OPEN     ej FWD  | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_UNLOAD
+ 29 plc:scan                     mould OPEN     ej FWD  | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_UNLOAD
+ 30 rob:wait_ok                  mould OPEN     ej FWD  | robot GRIP               line 36: WAIT RI[1:PART_OK]=ON TIMEOUT,LBL[99]        | PLC S_UNLOAD
+ 31 rob:wait_ok                  mould OPEN     ej FWD  | robot GRIP               line 37: DO[2:REQ_EJ_FWD]=OFF                         | PLC S_UNLOAD
+ 32 rob:instr                    mould OPEN     ej FWD  | robot GRIP               line 38: L PR[3:MOULD_IN] 500mm/sec FINE              | PLC S_UNLOAD
+ 33 rob:move_start               mould OPEN     ej FWD  | robot GRIP>MOULD_IN      line 38: L PR[3:MOULD_IN] 500mm/sec FINE              | PLC S_UNLOAD
+ 34 rob:move_done                mould OPEN     ej FWD  | robot MOULD_IN           line 39: DO[3:REQ_EJ_BACK]=ON                         | PLC S_UNLOAD
+ 35 rob:instr                    mould OPEN     ej FWD  | robot MOULD_IN           line 40: L PR[2:WAIT_IMM] 2000mm/sec FINE             | PLC S_UNLOAD
+ 36 plc:scan                     mould OPEN     ej FWD  | robot MOULD_IN           line 40: L PR[2:WAIT_IMM] 2000mm/sec FINE             | PLC S_UNLOAD
+ 37 imm:ej_back_done             mould OPEN     ej BACK | robot MOULD_IN           line 40: L PR[2:WAIT_IMM] 2000mm/sec FINE             | PLC S_UNLOAD
+ 38 fault:A6_stuck_high          mould OPEN     ej BACK | robot MOULD_IN           line 40: L PR[2:WAIT_IMM] 2000mm/sec FINE             | PLC S_UNLOAD
+ 39 imm:close_start              mould CLOSING  ej BACK | robot MOULD_IN           line 40: L PR[2:WAIT_IMM] 2000mm/sec FINE             | PLC S_UNLOAD  <-- P1: mould closing on the gripper
+
+=== variant B (as A, but the Mould area free contact is bridged at the machine)
+=== scenario: plc_power_loss_A6_high (cell PLC loses power and A6 goes HIGH, as EUROMAP 67 asks for a handling device that is switched off)
+=== shortest path to a P1 state: 39 steps (each line shows the state after the step and the next robot instruction)
+  0 init                         mould CLOSED   ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  1 imm:process_done             mould CLOSED   ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  2 imm:open_start               mould OPENING  ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  3 imm:open_done                mould OPEN     ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  4 rob:instr                    mould OPEN     ej BACK | robot HOME               line 9: DO[2:REQ_EJ_FWD]=OFF                          | PLC S_INIT
+  5 rob:instr                    mould OPEN     ej BACK | robot HOME               line 10: DO[3:REQ_EJ_BACK]=OFF                        | PLC S_INIT
+  6 rob:instr                    mould OPEN     ej BACK | robot HOME               line 11: DO[4:AT_CUT]=OFF                             | PLC S_INIT
+  7 rob:instr                    mould OPEN     ej BACK | robot HOME               line 12: DO[5:PLACED]=OFF                             | PLC S_INIT
+  8 rob:instr                    mould OPEN     ej BACK | robot HOME               line 13: DO[6:FAULT]=OFF                              | PLC S_INIT
+  9 rob:instr                    mould OPEN     ej BACK | robot HOME               line 14: DO[7:AT_WAIT]=OFF                            | PLC S_INIT
+ 10 rob:instr                    mould OPEN     ej BACK | robot HOME               line 15: J PR[2:WAIT_IMM] 100% FINE                   | PLC S_INIT
+ 11 rob:move_start               mould OPEN     ej BACK | robot HOME>WAIT_IMM      line 15: J PR[2:WAIT_IMM] 100% FINE                   | PLC S_INIT
+ 12 rob:move_done                mould OPEN     ej BACK | robot WAIT_IMM           line 17: IF DI[8:CYCLE_ENABLE]=ON,JMP LBL[2]          | PLC S_INIT
+ 13 plc:scan                     mould OPEN     ej BACK | robot WAIT_IMM           line 17: IF DI[8:CYCLE_ENABLE]=ON,JMP LBL[2]          | PLC S_MOULDING
+ 14 rob:instr                    mould OPEN     ej BACK | robot WAIT_IMM           line 24: WAIT DI[1:IMM_AUTO]=ON                       | PLC S_MOULDING
+ 15 rob:wait_ok                  mould OPEN     ej BACK | robot WAIT_IMM           line 25: WAIT (DI[2:MOULD_OPEN]=ON OR DI[8:CYCLE_ENABLE]=OFF) | PLC S_MOULDING
+ 16 plc:scan                     mould OPEN     ej BACK | robot WAIT_IMM           line 25: WAIT (DI[2:MOULD_OPEN]=ON OR DI[8:CYCLE_ENABLE]=OFF) | PLC S_OPEN
+ 17 rob:wait_ok                  mould OPEN     ej BACK | robot WAIT_IMM           line 26: IF DI[8:CYCLE_ENABLE]=OFF,JMP LBL[1]         | PLC S_OPEN
+ 18 rob:instr                    mould OPEN     ej BACK | robot WAIT_IMM           line 28: IF DI[2:MOULD_OPEN]=OFF,JMP LBL[1]           | PLC S_OPEN
+ 19 rob:instr                    mould OPEN     ej BACK | robot WAIT_IMM           line 31: L PR[3:MOULD_IN] 2000mm/sec FINE             | PLC S_OPEN
+ 20 rob:move_start               mould OPEN     ej BACK | robot WAIT_IMM>MOULD_IN  line 31: L PR[3:MOULD_IN] 2000mm/sec FINE             | PLC S_OPEN
+ 21 rob:move_done                mould OPEN     ej BACK | robot MOULD_IN           line 32: L PR[4:GRIP] 500mm/sec FINE                  | PLC S_OPEN
+ 22 rob:move_start               mould OPEN     ej BACK | robot MOULD_IN>GRIP      line 32: L PR[4:GRIP] 500mm/sec FINE                  | PLC S_OPEN
+ 23 rob:move_done                mould OPEN     ej BACK | robot GRIP               line 33: RO[1:VACUUM]=ON                              | PLC S_OPEN
+ 24 rob:instr                    mould OPEN     ej BACK | robot GRIP               line 34: DO[2:REQ_EJ_FWD]=ON                          | PLC S_OPEN
+ 25 rob:instr                    mould OPEN     ej BACK | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_OPEN
+ 26 cell:part_gripped            mould OPEN     ej BACK | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_OPEN
+ 27 plc:scan                     mould OPEN     ej BACK | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_UNLOAD
+ 28 imm:ej_fwd_done              mould OPEN     ej FWD  | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_UNLOAD
+ 29 plc:scan                     mould OPEN     ej FWD  | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_UNLOAD
+ 30 rob:wait_ok                  mould OPEN     ej FWD  | robot GRIP               line 36: WAIT RI[1:PART_OK]=ON TIMEOUT,LBL[99]        | PLC S_UNLOAD
+ 31 rob:wait_ok                  mould OPEN     ej FWD  | robot GRIP               line 37: DO[2:REQ_EJ_FWD]=OFF                         | PLC S_UNLOAD
+ 32 rob:instr                    mould OPEN     ej FWD  | robot GRIP               line 38: L PR[3:MOULD_IN] 500mm/sec FINE              | PLC S_UNLOAD
+ 33 rob:move_start               mould OPEN     ej FWD  | robot GRIP>MOULD_IN      line 38: L PR[3:MOULD_IN] 500mm/sec FINE              | PLC S_UNLOAD
+ 34 rob:move_done                mould OPEN     ej FWD  | robot MOULD_IN           line 39: DO[3:REQ_EJ_BACK]=ON                         | PLC S_UNLOAD
+ 35 rob:instr                    mould OPEN     ej FWD  | robot MOULD_IN           line 40: L PR[2:WAIT_IMM] 2000mm/sec FINE             | PLC S_UNLOAD
+ 36 plc:scan                     mould OPEN     ej FWD  | robot MOULD_IN           line 40: L PR[2:WAIT_IMM] 2000mm/sec FINE             | PLC S_UNLOAD
+ 37 imm:ej_back_done             mould OPEN     ej BACK | robot MOULD_IN           line 40: L PR[2:WAIT_IMM] 2000mm/sec FINE             | PLC S_UNLOAD
+ 38 fault:plc_power_loss_A6_high mould OPEN     ej BACK | robot MOULD_IN           line 40: L PR[2:WAIT_IMM] 2000mm/sec FINE             | PLC S_UNLOAD
+ 39 imm:close_start              mould CLOSING  ej BACK | robot MOULD_IN           line 40: L PR[2:WAIT_IMM] 2000mm/sec FINE             | PLC S_UNLOAD  <-- P1: mould closing on the gripper
+
+=== variant C (weakened: contact bridged, A6 straight from the robot output, early-enable program)
+=== scenario: none (no fault)
+=== shortest path to a P1 state: 42 steps (each line shows the state after the step and the next robot instruction)
+  0 init                         mould CLOSED   ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  1 imm:process_done             mould CLOSED   ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  2 imm:open_start               mould OPENING  ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  3 imm:open_done                mould OPEN     ej BACK | robot HOME               line 8: DO[1:REQ_CLOSE]=OFF                           | PLC S_INIT
+  4 rob:instr                    mould OPEN     ej BACK | robot HOME               line 9: DO[2:REQ_EJ_FWD]=OFF                          | PLC S_INIT
+  5 rob:instr                    mould OPEN     ej BACK | robot HOME               line 10: DO[3:REQ_EJ_BACK]=OFF                        | PLC S_INIT
+  6 rob:instr                    mould OPEN     ej BACK | robot HOME               line 11: DO[4:AT_CUT]=OFF                             | PLC S_INIT
+  7 rob:instr                    mould OPEN     ej BACK | robot HOME               line 12: DO[5:PLACED]=OFF                             | PLC S_INIT
+  8 rob:instr                    mould OPEN     ej BACK | robot HOME               line 13: DO[6:FAULT]=OFF                              | PLC S_INIT
+  9 rob:instr                    mould OPEN     ej BACK | robot HOME               line 14: DO[7:AT_WAIT]=OFF                            | PLC S_INIT
+ 10 rob:instr                    mould OPEN     ej BACK | robot HOME               line 15: J PR[2:WAIT_IMM] 100% FINE                   | PLC S_INIT
+ 11 rob:move_start               mould OPEN     ej BACK | robot HOME>WAIT_IMM      line 15: J PR[2:WAIT_IMM] 100% FINE                   | PLC S_INIT
+ 12 rob:move_done                mould OPEN     ej BACK | robot WAIT_IMM           line 17: IF DI[8:CYCLE_ENABLE]=ON,JMP LBL[2]          | PLC S_INIT
+ 13 plc:scan                     mould OPEN     ej BACK | robot WAIT_IMM           line 17: IF DI[8:CYCLE_ENABLE]=ON,JMP LBL[2]          | PLC S_MOULDING
+ 14 rob:instr                    mould OPEN     ej BACK | robot WAIT_IMM           line 24: WAIT DI[1:IMM_AUTO]=ON                       | PLC S_MOULDING
+ 15 rob:wait_ok                  mould OPEN     ej BACK | robot WAIT_IMM           line 25: WAIT (DI[2:MOULD_OPEN]=ON OR DI[8:CYCLE_ENABLE]=OFF) | PLC S_MOULDING
+ 16 plc:scan                     mould OPEN     ej BACK | robot WAIT_IMM           line 25: WAIT (DI[2:MOULD_OPEN]=ON OR DI[8:CYCLE_ENABLE]=OFF) | PLC S_OPEN
+ 17 rob:wait_ok                  mould OPEN     ej BACK | robot WAIT_IMM           line 26: IF DI[8:CYCLE_ENABLE]=OFF,JMP LBL[1]         | PLC S_OPEN
+ 18 rob:instr                    mould OPEN     ej BACK | robot WAIT_IMM           line 28: IF DI[2:MOULD_OPEN]=OFF,JMP LBL[1]           | PLC S_OPEN
+ 19 rob:instr                    mould OPEN     ej BACK | robot WAIT_IMM           line 31: L PR[3:MOULD_IN] 2000mm/sec FINE             | PLC S_OPEN
+ 20 rob:move_start               mould OPEN     ej BACK | robot WAIT_IMM>MOULD_IN  line 31: L PR[3:MOULD_IN] 2000mm/sec FINE             | PLC S_OPEN
+ 21 rob:move_done                mould OPEN     ej BACK | robot MOULD_IN           line 32: L PR[4:GRIP] 500mm/sec FINE                  | PLC S_OPEN
+ 22 rob:move_start               mould OPEN     ej BACK | robot MOULD_IN>GRIP      line 32: L PR[4:GRIP] 500mm/sec FINE                  | PLC S_OPEN
+ 23 rob:move_done                mould OPEN     ej BACK | robot GRIP               line 33: RO[1:VACUUM]=ON                              | PLC S_OPEN
+ 24 rob:instr                    mould OPEN     ej BACK | robot GRIP               line 34: DO[2:REQ_EJ_FWD]=ON                          | PLC S_OPEN
+ 25 rob:instr                    mould OPEN     ej BACK | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_OPEN
+ 26 cell:part_gripped            mould OPEN     ej BACK | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_OPEN
+ 27 plc:scan                     mould OPEN     ej BACK | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_UNLOAD
+ 28 imm:ej_fwd_done              mould OPEN     ej FWD  | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_UNLOAD
+ 29 plc:scan                     mould OPEN     ej FWD  | robot GRIP               line 35: WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99]         | PLC S_UNLOAD
+ 30 rob:wait_ok                  mould OPEN     ej FWD  | robot GRIP               line 36: WAIT RI[1:PART_OK]=ON TIMEOUT,LBL[99]        | PLC S_UNLOAD
+ 31 rob:wait_ok                  mould OPEN     ej FWD  | robot GRIP               line 37: DO[2:REQ_EJ_FWD]=OFF                         | PLC S_UNLOAD
+ 32 rob:instr                    mould OPEN     ej FWD  | robot GRIP               line 38: L PR[3:MOULD_IN] 500mm/sec FINE              | PLC S_UNLOAD
+ 33 rob:move_start               mould OPEN     ej FWD  | robot GRIP>MOULD_IN      line 38: L PR[3:MOULD_IN] 500mm/sec FINE              | PLC S_UNLOAD
+ 34 rob:move_done                mould OPEN     ej FWD  | robot MOULD_IN           line 39: DO[3:REQ_EJ_BACK]=ON                         | PLC S_UNLOAD
+ 35 rob:instr                    mould OPEN     ej FWD  | robot MOULD_IN           line 43: WAIT DI[5:EJ_BACK]=ON TIMEOUT,LBL[99]        | PLC S_UNLOAD
+ 36 plc:scan                     mould OPEN     ej FWD  | robot MOULD_IN           line 43: WAIT DI[5:EJ_BACK]=ON TIMEOUT,LBL[99]        | PLC S_UNLOAD
+ 37 imm:ej_back_done             mould OPEN     ej BACK | robot MOULD_IN           line 43: WAIT DI[5:EJ_BACK]=ON TIMEOUT,LBL[99]        | PLC S_UNLOAD
+ 38 plc:scan                     mould OPEN     ej BACK | robot MOULD_IN           line 43: WAIT DI[5:EJ_BACK]=ON TIMEOUT,LBL[99]        | PLC S_UNLOAD
+ 39 rob:wait_ok                  mould OPEN     ej BACK | robot MOULD_IN           line 44: DO[3:REQ_EJ_BACK]=OFF                        | PLC S_UNLOAD
+ 40 rob:instr                    mould OPEN     ej BACK | robot MOULD_IN           line 45: DO[1:REQ_CLOSE]=ON                           | PLC S_UNLOAD
+ 41 rob:instr                    mould OPEN     ej BACK | robot MOULD_IN           line 46: L PR[2:WAIT_IMM] 2000mm/sec FINE             | PLC S_UNLOAD
+ 42 imm:close_start              mould CLOSING  ej BACK | robot MOULD_IN           line 46: L PR[2:WAIT_IMM] 2000mm/sec FINE             | PLC S_UNLOAD  <-- P1: mould closing on the gripper

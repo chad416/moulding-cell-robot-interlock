@@ -1,0 +1,95 @@
+/PROG  UNLOAD_EARLY
+/ATTR
+OWNER		= MNEDITOR;
+COMMENT		= "WEAK early enable";
+PROG_SIZE	= 0;
+CREATE		= DATE 26-11-25  TIME 12:00:00;
+MODIFIED	= DATE 26-11-25  TIME 12:00:00;
+FILE_NAME	= ;
+VERSION		= 0;
+LINE_COUNT	= 71;
+MEMORY_SIZE	= 0;
+PROTECT		= READ_WRITE;
+TCD:  STACK_SIZE	= 0,
+      TASK_PRIORITY	= 50,
+      TIME_SLICE	= 0,
+      BUSY_LAMP_OFF	= 0,
+      ABORT_REQUEST	= 0,
+      PAUSE_REQUEST	= 0;
+DEFAULT_GROUP	= 1,*,*,*,*;
+CONTROL_CODE	= 00000000 00000000;
+/APPL
+/MN
+   1:  !Unload the mould of an injection ;
+   2:  !moulding machine. Handshake with ;
+   3:  !PLC FB CELL_PLC (EUROMAP 67) ;
+   4:  !Signals: robot/io_map.yaml ;
+   5:  UFRAME_NUM=1 ;
+   6:  UTOOL_NUM=1 ;
+   7:  $WAITTMOUT=500 ;
+   8:  DO[1:REQ_CLOSE]=OFF ;
+   9:  DO[2:REQ_EJ_FWD]=OFF ;
+  10:  DO[3:REQ_EJ_BACK]=OFF ;
+  11:  DO[4:AT_CUT]=OFF ;
+  12:  DO[5:PLACED]=OFF ;
+  13:  DO[6:FAULT]=OFF ;
+  14:  DO[7:AT_WAIT]=OFF ;
+  15:  J PR[2:WAIT_IMM] 100% FINE ;
+  16:  LBL[1:CYCLE] ;
+  17:  IF DI[8:CYCLE_ENABLE]=ON,JMP LBL[2] ;
+  18:  !Access requested: park here ;
+  19:  DO[7:AT_WAIT]=ON ;
+  20:  WAIT DI[8:CYCLE_ENABLE]=ON ;
+  21:  DO[7:AT_WAIT]=OFF ;
+  22:  JMP LBL[1] ;
+  23:  LBL[2:RUN] ;
+  24:  WAIT DI[1:IMM_AUTO]=ON ;
+  25:  WAIT (DI[2:MOULD_OPEN]=ON OR DI[8:CYCLE_ENABLE]=OFF) ;
+  26:  IF DI[8:CYCLE_ENABLE]=OFF,JMP LBL[1] ;
+  27:  !Last check before the move ;
+  28:  IF DI[2:MOULD_OPEN]=OFF,JMP LBL[1] ;
+  29:  !Enter: DO[10] goes OFF when the ;
+  30:  !robot leaves the start position ;
+  31:  L PR[3:MOULD_IN] 2000mm/sec FINE ;
+  32:  L PR[4:GRIP] 500mm/sec FINE ;
+  33:  RO[1:VACUUM]=ON ;
+  34:  DO[2:REQ_EJ_FWD]=ON ;
+  35:  WAIT DI[4:EJ_FWD]=ON TIMEOUT,LBL[99] ;
+  36:  WAIT RI[1:PART_OK]=ON TIMEOUT,LBL[99] ;
+  37:  DO[2:REQ_EJ_FWD]=OFF ;
+  38:  L PR[3:MOULD_IN] 500mm/sec FINE ;
+  39:  DO[3:REQ_EJ_BACK]=ON ;
+  40:  !WEAKENED: closure requested as ;
+  41:  !soon as the ejector is back, ;
+  42:  !the retreat runs in parallel ;
+  43:  WAIT DI[5:EJ_BACK]=ON TIMEOUT,LBL[99] ;
+  44:  DO[3:REQ_EJ_BACK]=OFF ;
+  45:  DO[1:REQ_CLOSE]=ON ;
+  46:  L PR[2:WAIT_IMM] 2000mm/sec FINE ;
+  47:  !Downstream while the mould closes ;
+  48:  J PR[5:CUT] 100% FINE ;
+  49:  DO[4:AT_CUT]=ON ;
+  50:  WAIT DI[6:CUT_DONE]=ON TIMEOUT,LBL[99] ;
+  51:  DO[4:AT_CUT]=OFF ;
+  52:  WAIT DI[7:PLACE_FREE]=ON TIMEOUT,LBL[99] ;
+  53:  J PR[6:PLACE_APPR] 100% FINE ;
+  54:  L PR[7:PLACE] 1000mm/sec FINE ;
+  55:  RO[1:VACUUM]=OFF ;
+  56:  WAIT RI[1:PART_OK]=OFF TIMEOUT,LBL[99] ;
+  57:  L PR[6:PLACE_APPR] 1000mm/sec FINE ;
+  58:  DO[5:PLACED]=ON ;
+  59:  WAIT DI[9:PLACE_ACK]=ON TIMEOUT,LBL[99] ;
+  60:  DO[5:PLACED]=OFF ;
+  61:  !Finish the closure handshake ;
+  62:  WAIT DI[3:MOULD_CLOSED]=ON TIMEOUT,LBL[99] ;
+  63:  DO[1:REQ_CLOSE]=OFF ;
+  64:  WAIT DI[3:MOULD_CLOSED]=OFF TIMEOUT,LBL[99] ;
+  65:  J PR[2:WAIT_IMM] 100% FINE ;
+  66:  JMP LBL[1] ;
+  67:  LBL[99:FAULT] ;
+  68:  DO[1:REQ_CLOSE]=OFF ;
+  69:  DO[2:REQ_EJ_FWD]=OFF ;
+  70:  DO[6:FAULT]=ON ;
+  71:  UALM[1] ;
+/POS
+/END

@@ -1,0 +1,38 @@
+# Handshake between the PLC function block CELL_PLC (plc/st/cell_plc.st) and the robot program UNLOAD_IMM.ls.
+# robot_di: PLC output -> robot digital input.  robot_do: robot digital output -> PLC input.
+robot_di:
+  1: {name: IMM_AUTO, plc: qRbImmAuto}
+  2: {name: MOULD_OPEN, plc: qRbMouldOpen}
+  3: {name: MOULD_CLOSED, plc: qRbMouldClosed}
+  4: {name: EJ_FWD, plc: qRbEjFwd}
+  5: {name: EJ_BACK, plc: qRbEjBack}
+  6: {name: CUT_DONE, plc: qRbCutDone}
+  7: {name: PLACE_FREE, plc: qRbPlaceFree}
+  8: {name: CYCLE_ENABLE, plc: qRbCycleEnable}
+  9: {name: PLACE_ACK, plc: qRbPlaceAck}
+robot_do:
+  1: {name: REQ_CLOSE, plc: rbReqClose}
+  2: {name: REQ_EJ_FWD, plc: rbReqEjFwd}
+  3: {name: REQ_EJ_BACK, plc: rbReqEjBack}
+  4: {name: AT_CUT, plc: rbAtCut}
+  5: {name: PLACED, plc: rbPlaced}
+  6: {name: FAULT, plc: rbFault}
+  7: {name: AT_WAIT, plc: rbAtWait}
+# Set by the controller's zone function, not by the program: ON while the tool is at rest inside the start-position
+# zone or anywhere outside the mould area, OFF from the moment a move towards the mould area starts.
+# DO[10] is the monitoring copy for the PLC. The EUROMAP 67 contacts A3/C3 "Mould area free" need a
+# safety-rated position check with two output channels; that function is outside this repository.
+robot_zone_do:
+  10: {name: MOULD_AREA_FREE, plc: rbAreaFree}
+robot_ro:
+  1: {name: VACUUM}
+robot_ri:
+  1: {name: PART_OK}
+position_registers:
+  1: HOME
+  2: WAIT_IMM
+  3: MOULD_IN
+  4: GRIP
+  5: CUT
+  6: PLACE_APPR
+  7: PLACE

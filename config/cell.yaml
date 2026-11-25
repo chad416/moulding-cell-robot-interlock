@@ -1,0 +1,106 @@
+# Injection moulding cell for exterior door-handle parts. Every value is tagged:
+#   [S] sourced (reference key from DOSSIER section 13), [D] derived in code, [A] assumed.
+
+scenario:                       # [S] R1: user report on a door-handle moulding plant, March 2018
+  machines: 14
+  clamp_force_kN: [1800, 5500]
+  cavities: 4                   # "with few exceptions, the handles are manufactured with 4-cavity molds"
+  public_cycle_s: [45, 50]      # gas-injection handles, "about 45 to 50 seconds"
+  public_units_per_year: 3500000  # "door handle assemblies", plant total
+  material: PA6-GF30
+
+material:                       # [S] R4: product information of a PA6-GF30 injection grade
+  name: PA6-GF30
+  density_kg_m3: 1360
+  conductivity_W_mK: 0.36
+  heat_capacity_J_kgK: 1500
+  T_melt_C: 280                 # recommended melt temperature
+  T_mould_C: 80                 # recommended mould temperature
+  T_melting_dsc_C: 220
+  hdt_a_C: 210
+  T_demould_C: 120              # [A] mean part temperature at demoulding; no public value found, see sensitivity
+  T_demould_range_C: [100, 160] # [A]
+
+part:
+  wall_mm: 7.0                  # [A] thickest section of the grip; chosen so that the model cycle falls in the public 45-50 s band
+  wall_range_mm: [3.0, 8.0]
+
+cycle:                          # [A] machine times of a 2000-3000 kN class machine; none is from a datasheet
+  injection_s: 1.5
+  holding_s: 8.0                # holding pressure acts during the first part of the cooling time
+  mould_open_s: 2.2
+  mould_close_s: 2.4
+  ejector_fwd_s: 0.4
+  ejector_back_s: 0.4
+  dry_overhead_s: 0.6           # clamp build-up, nozzle contact, signal times
+
+production:                     # [A]
+  hours_per_year: 5760          # 3 shifts x 5 days x 48 weeks
+  oee: 0.85
+
+robot_6axis:                    # [S] R5: public product page of a 6-axis robot, 25 kg payload, 1831 mm reach
+  name: FANUC M-20iD/25
+  payload_kg: 25
+  reach_mm: 1831
+  joint_speed_deg_s: [210, 210, 265, 420, 420, 720]
+  accel_time_s: 0.25            # [A] time to reach full joint speed; joint accelerations are not published
+  accel_time_range_s: [0.15, 0.40]
+  linear_speed_max_mm_s: 2000   # [A] programmed linear speed limit
+  link_upper_mm: 840            # [A] J2-J3; the public page gives only the reach
+  link_fore_mm: 990             # [A] J3 to tool centre point including the gripper
+  io_scan_s: 0.008              # [A]
+
+robot_linear:                   # [A] 3-axis linear robot, servo axes; values assumed, not from a datasheet
+  name: 3-axis linear (top entry)
+  vertical: {v_mm_s: 3000, a_mm_s2: 20000}
+  kick: {v_mm_s: 1500, a_mm_s2: 15000}
+  traverse: {v_mm_s: 2500, a_mm_s2: 10000}
+
+gripper:                        # [A]
+  vacuum_on_s: 0.25
+  release_s: 0.20
+
+# Cell layouts. Positions are tool-centre points in the robot base frame: [x radial towards the mould, y, z] in mm.
+# Zones: START = start position outside the mould area (mould area free), MOULD = inside, OUT = outside.
+layouts:
+  side_6axis:
+    name: 6-axis, side entry
+    kind: six_axis
+    floor_m2: 9.0               # [A] robot pedestal, reach envelope, guard
+    downstream: "sprue cut, gate check, place on fixture or conveyor in any orientation"
+    positions:
+      HOME:       {xyz: [600, -900, 500],  zone: OUT}
+      WAIT_IMM:   {xyz: [750, 0, 400],     zone: START}
+      MOULD_IN:   {xyz: [1450, 0, 400],    zone: MOULD}
+      GRIP:       {xyz: [1450, 90, 400],   zone: MOULD}
+      CUT:        {xyz: [300, -1000, 300], zone: OUT}
+      PLACE_APPR: {xyz: [-700, -800, 350], zone: OUT}
+      PLACE:      {xyz: [-700, -800, 150], zone: OUT}
+  top_6axis:
+    name: 6-axis, top entry
+    kind: six_axis
+    floor_m2: 6.0               # [A] robot on a riser beside the fixed platen
+    downstream: "as side entry; longer path over the guard"
+    positions:
+      HOME:       {xyz: [500, -900, 300],  zone: OUT}
+      WAIT_IMM:   {xyz: [1100, 0, 550],    zone: START}
+      MOULD_IN:   {xyz: [1100, 0, -450],   zone: MOULD}
+      GRIP:       {xyz: [1100, 90, -450],  zone: MOULD}
+      CUT:        {xyz: [300, -1000, 100], zone: OUT}
+      PLACE_APPR: {xyz: [-700, -800, 150], zone: OUT}
+      PLACE:      {xyz: [-700, -800, -50], zone: OUT}
+  top_linear:
+    name: 3-axis linear, top entry
+    kind: linear
+    floor_m2: 2.5               # [A] conveyor strip beside the machine; the robot sits on the fixed platen
+    downstream: "sprue cut in the gripper, drop on a conveyor in one orientation"
+    strokes_mm: {vertical: 1000, kick: 90, traverse: 1500, place_down: 600}
+
+plc:
+  scan_s: 0.010                 # [A]
+  close_timeout_s: 6.0          # watchdog for the closing stroke
+
+cell_devices:                   # [A]
+  cutter_close_s: 0.30
+  cutter_open_s: 0.30
+  conveyor_index_s: 1.5

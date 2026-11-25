@@ -1,0 +1,2571 @@
+{
+ "physics": {
+  "a_mm2_s": 0.1764705882352941,
+  "cooling_mean_s": 39.37059508089782,
+  "cooling_centre_s": 52.075204040523275,
+  "cooling_mean_fd_s": 39.359249999999435,
+  "cooling_centre_fd_s": 52.06249999999724,
+  "wall_sweep": [
+   {
+    "wall_mm": 3.0,
+    "cooling_s": 7.231333790368987
+   },
+   {
+    "wall_mm": 4.0,
+    "cooling_s": 12.855704516211533
+   },
+   {
+    "wall_mm": 5.0,
+    "cooling_s": 20.08703830658052
+   },
+   {
+    "wall_mm": 6.0,
+    "cooling_s": 28.92533516147595
+   },
+   {
+    "wall_mm": 7.0,
+    "cooling_s": 39.37059508089782
+   },
+   {
+    "wall_mm": 8.0,
+    "cooling_s": 51.42281806484613
+   }
+  ],
+  "demould_sweep": [
+   {
+    "T_E": 100,
+    "cooling_s": 58.871261907446105
+   },
+   {
+    "T_E": 110,
+    "cooling_s": 47.46410307485833
+   },
+   {
+    "T_E": 120,
+    "cooling_s": 39.37059508089782
+   },
+   {
+    "T_E": 140,
+    "cooling_s": 27.963436248310046
+   },
+   {
+    "T_E": 160,
+    "cooling_s": 19.869928254349535
+   }
+  ],
+  "alternatives": {
+   "top_linear": {
+    "name": "3-axis linear, top entry",
+    "t_in_s": 0.63825266718163,
+    "t_grip_eject_s": 0.4,
+    "t_out_s": 0.63825266718163,
+    "latency_s": 0.036000000000000004,
+    "removal_s": 1.71250533436326,
+    "downstream_s": 3.1999999999999997,
+    "floor_m2": 2.5,
+    "downstream": "sprue cut in the gripper, drop on a conveyor in one orientation",
+    "cycle_s": 47.78310041526108,
+    "phases": {
+     "injection": 1.5,
+     "holding": 8.0,
+     "remaining cooling": 31.37059508089782,
+     "mould opening": 2.2,
+     "removal (mould open)": 1.71250533436326,
+     "mould closing": 2.4,
+     "overhead": 0.6
+    },
+    "robot_idle_s": 42.87059508089782,
+    "shots_per_machine": 368866.81372334505,
+    "parts_per_machine": 1475467.2548933802,
+    "parts_plant": 20656541.56850732,
+    "parts_per_public_unit": 5.90186901957352,
+    "d_removal_s": 0.0,
+    "d_cycle_pct": 0.0,
+    "d_parts_per_machine": 0.0
+   },
+   "side_6axis": {
+    "name": "6-axis, side entry",
+    "t_in_s": 0.7529017401808888,
+    "t_grip_eject_s": 0.4,
+    "t_out_s": 0.7529017401808908,
+    "latency_s": 0.036000000000000004,
+    "removal_s": 1.9418034803617799,
+    "downstream_s": 3.3089031352413847,
+    "floor_m2": 9.0,
+    "downstream": "sprue cut, gate check, place on fixture or conveyor in any orientation",
+    "cycle_s": 48.0123985612596,
+    "phases": {
+     "injection": 1.5,
+     "holding": 8.0,
+     "remaining cooling": 31.37059508089782,
+     "mould opening": 2.2,
+     "removal (mould open)": 1.9418034803617799,
+     "mould closing": 2.4,
+     "overhead": 0.6
+    },
+    "robot_idle_s": 42.76169194565644,
+    "shots_per_machine": 367105.175499851,
+    "parts_per_machine": 1468420.701999404,
+    "parts_plant": 20557889.827991657,
+    "parts_per_public_unit": 5.873682807997616,
+    "d_removal_s": 0.22929814599851994,
+    "d_cycle_pct": 0.47987289231086844,
+    "d_parts_per_machine": -7046.552893976215
+   },
+   "top_6axis": {
+    "name": "6-axis, top entry",
+    "t_in_s": 0.8617356946302208,
+    "t_grip_eject_s": 0.4,
+    "t_out_s": 0.8617356946302208,
+    "latency_s": 0.036000000000000004,
+    "removal_s": 2.1594713892604416,
+    "downstream_s": 3.3326796289403444,
+    "floor_m2": 6.0,
+    "downstream": "as side entry; longer path over the guard",
+    "cycle_s": 48.23006647015826,
+    "phases": {
+     "injection": 1.5,
+     "holding": 8.0,
+     "remaining cooling": 31.37059508089782,
+     "mould opening": 2.2,
+     "removal (mould open)": 2.1594713892604416,
+     "mould closing": 2.4,
+     "overhead": 0.6
+    },
+    "robot_idle_s": 42.73791545195748,
+    "shots_per_machine": 365448.38707418356,
+    "parts_per_machine": 1461793.5482967342,
+    "parts_plant": 20465109.67615428,
+    "parts_per_public_unit": 5.8471741931869365,
+    "d_removal_s": 0.44696605489718166,
+    "d_cycle_pct": 0.9354061394359178,
+    "d_parts_per_machine": -13673.706596645992
+   }
+  },
+  "sensitivity": {
+   "parts_per_machine_per_second_open": 29960.188546252204,
+   "cycle_pct_per_second_open": 2.0827953402996267,
+   "accel": [
+    {
+     "accel_time_s": 0.15,
+     "removal_s": 1.7634820882170679
+    },
+    {
+     "accel_time_s": 0.2,
+     "removal_s": 1.8526427842894237
+    },
+    {
+     "accel_time_s": 0.25,
+     "removal_s": 1.9418034803617799
+    },
+    {
+     "accel_time_s": 0.3,
+     "removal_s": 2.0309641764341357
+    },
+    {
+     "accel_time_s": 0.4,
+     "removal_s": 2.2092855685788475
+    }
+   ],
+   "wall": [
+    {
+     "wall_mm": 2.0,
+     "cycle_linear_s": 11.626431463416143,
+     "cycle_6axis_s": 11.855729609414663,
+     "penalty_pct": 1.9722143180393057
+    },
+    {
+     "wall_mm": 3.0,
+     "cycle_linear_s": 15.643839124732247,
+     "cycle_6axis_s": 15.873137270730767,
+     "penalty_pct": 1.4657408847679165
+    },
+    {
+     "wall_mm": 4.0,
+     "cycle_linear_s": 21.26820985057479,
+     "cycle_6axis_s": 21.49750799657331,
+     "penalty_pct": 1.078126215650082
+    },
+    {
+     "wall_mm": 5.0,
+     "cycle_linear_s": 28.49954364094378,
+     "cycle_6axis_s": 28.7288417869423,
+     "penalty_pct": 0.8045677814612423
+    },
+    {
+     "wall_mm": 6.0,
+     "cycle_linear_s": 37.33784049583921,
+     "cycle_6axis_s": 37.56713864183773,
+     "penalty_pct": 0.6141173216058708
+    },
+    {
+     "wall_mm": 7.0,
+     "cycle_linear_s": 47.78310041526108,
+     "cycle_6axis_s": 48.0123985612596,
+     "penalty_pct": 0.47987289231086844
+    },
+    {
+     "wall_mm": 8.0,
+     "cycle_linear_s": 59.83532339920939,
+     "cycle_6axis_s": 60.06462154520791,
+     "penalty_pct": 0.3832153533602355
+    }
+   ]
+  },
+  "moves_side_6axis": {
+   "WAIT_IMM->MOULD_IN": 0.5493813136313616,
+   "MOULD_IN->GRIP": 0.2035204265495273,
+   "GRIP->MOULD_IN": 0.2035204265495273,
+   "MOULD_IN->WAIT_IMM": 0.5493813136313636,
+   "WAIT_IMM->CUT": 0.5990512179333637,
+   "CUT->PLACE_APPR": 0.5256436638081108,
+   "PLACE_APPR->PLACE": 0.2547566858792178,
+   "PLACE->PLACE_APPR": 0.2547566858792178,
+   "PLACE_APPR->WAIT_IMM": 0.8746948817414745,
+   "HOME->WAIT_IMM": 0.5181425355905724
+  }
+ },
+ "model": {
+  "variants": {
+   "A": {
+    "title": "design: Mould area free contact used, A6 gated by the PLC, four-phase program",
+    "scenarios": {
+     "none": {
+      "states": 13819,
+      "transitions": 47151,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZA6_stuck_low": {
+      "states": 28216,
+      "transitions": 109453,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZA6_stuck_high": {
+      "states": 31577,
+      "transitions": 119078,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZA7_stuck_low": {
+      "states": 29064,
+      "transitions": 112875,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZA7_stuck_high": {
+      "states": 37090,
+      "transitions": 140413,
+      "P1_states": 0,
+      "P2_states": 320,
+      "P1_trace_len": null,
+      "P2_trace_len": 20
+     },
+     "ZB2_stuck_low": {
+      "states": 38326,
+      "transitions": 150276,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZB2_stuck_high": {
+      "states": 27638,
+      "transitions": 108121,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZB3_stuck_low": {
+      "states": 38343,
+      "transitions": 145738,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZB3_stuck_high": {
+      "states": 28040,
+      "transitions": 109497,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZB4_stuck_low": {
+      "states": 28040,
+      "transitions": 109497,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZB4_stuck_high": {
+      "states": 41007,
+      "transitions": 158712,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "A6_stuck_low": {
+      "states": 27638,
+      "transitions": 106627,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "A6_stuck_high": {
+      "states": 32114,
+      "transitions": 125375,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "B3_stuck_low": {
+      "states": 27638,
+      "transitions": 108073,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "B3_stuck_high": {
+      "states": 30340,
+      "transitions": 118111,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "B4_stuck_low": {
+      "states": 27638,
+      "transitions": 108049,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "B4_stuck_high": {
+      "states": 37110,
+      "transitions": 141964,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "MAF_stuck_low": {
+      "states": 27638,
+      "transitions": 102248,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "MAF_stuck_high": {
+      "states": 27638,
+      "transitions": 108121,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "REQ_CLOSE_stuck_low": {
+      "states": 30756,
+      "transitions": 118619,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "REQ_CLOSE_stuck_high": {
+      "states": 28934,
+      "transitions": 111448,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "REQ_EJ_FWD_stuck_low": {
+      "states": 27692,
+      "transitions": 108325,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "REQ_EJ_FWD_stuck_high": {
+      "states": 28934,
+      "transitions": 112251,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "REQ_EJ_BACK_stuck_low": {
+      "states": 27692,
+      "transitions": 108295,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "REQ_EJ_BACK_stuck_high": {
+      "states": 30482,
+      "transitions": 118521,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "AREA_FREE_stuck_low": {
+      "states": 29987,
+      "transitions": 114155,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "AREA_FREE_stuck_high": {
+      "states": 27692,
+      "transitions": 108213,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "MOULD_OPEN_stuck_low": {
+      "states": 27638,
+      "transitions": 108115,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "MOULD_OPEN_stuck_high": {
+      "states": 28364,
+      "transitions": 110379,
+      "P1_states": 0,
+      "P2_states": 420,
+      "P1_trace_len": null,
+      "P2_trace_len": 17
+     },
+     "MOULD_CLOSED_stuck_low": {
+      "states": 27888,
+      "transitions": 109041,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "MOULD_CLOSED_stuck_high": {
+      "states": 27972,
+      "transitions": 109291,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "EJ_FWD_stuck_low": {
+      "states": 27638,
+      "transitions": 108121,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "EJ_FWD_stuck_high": {
+      "states": 29426,
+      "transitions": 113391,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "EJ_BACK_stuck_low": {
+      "states": 27638,
+      "transitions": 108121,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "EJ_BACK_stuck_high": {
+      "states": 28522,
+      "transitions": 110607,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "CYCLE_ENABLE_stuck_low": {
+      "states": 27728,
+      "transitions": 108395,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "CYCLE_ENABLE_stuck_high": {
+      "states": 27650,
+      "transitions": 108166,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "zone_function_stuck_free": {
+      "states": 27692,
+      "transitions": 108213,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "robot_hold": {
+      "states": 27638,
+      "transitions": 110837,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "gate_forced": {
+      "states": 59032,
+      "transitions": 299411,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "gate_request": {
+      "states": 32931,
+      "transitions": 221919,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "robot_power_loss": {
+      "states": 30303,
+      "transitions": 96535,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "plc_power_loss": {
+      "states": 28163,
+      "transitions": 81892,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "plc_power_loss_A6_high": {
+      "states": 32229,
+      "transitions": 92120,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "imm_power_loss": {
+      "states": 37275,
+      "transitions": 129162,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     }
+    },
+    "states_total": 1366810,
+    "transitions_total": 5362922,
+    "P1_scenarios": [],
+    "P2_scenarios": [
+     "ZA7_stuck_high",
+     "MOULD_OPEN_stuck_high"
+    ]
+   },
+   "B": {
+    "title": "as A, but the Mould area free contact is bridged at the machine",
+    "scenarios": {
+     "none": {
+      "states": 13819,
+      "transitions": 47151,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZA6_stuck_low": {
+      "states": 28216,
+      "transitions": 109453,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZA6_stuck_high": {
+      "states": 31577,
+      "transitions": 119078,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZA7_stuck_low": {
+      "states": 29064,
+      "transitions": 112875,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZA7_stuck_high": {
+      "states": 37090,
+      "transitions": 140733,
+      "P1_states": 0,
+      "P2_states": 320,
+      "P1_trace_len": null,
+      "P2_trace_len": 20
+     },
+     "ZB2_stuck_low": {
+      "states": 38326,
+      "transitions": 150276,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZB2_stuck_high": {
+      "states": 27638,
+      "transitions": 108121,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZB3_stuck_low": {
+      "states": 38343,
+      "transitions": 145738,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZB3_stuck_high": {
+      "states": 28040,
+      "transitions": 109497,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZB4_stuck_low": {
+      "states": 28040,
+      "transitions": 109497,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "ZB4_stuck_high": {
+      "states": 41007,
+      "transitions": 158712,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "A6_stuck_low": {
+      "states": 27638,
+      "transitions": 106627,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "A6_stuck_high": {
+      "states": 32282,
+      "transitions": 125975,
+      "P1_states": 32,
+      "P2_states": 128,
+      "P1_trace_len": 39,
+      "P2_trace_len": 39
+     },
+     "B3_stuck_low": {
+      "states": 27638,
+      "transitions": 108073,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "B3_stuck_high": {
+      "states": 30340,
+      "transitions": 118111,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "B4_stuck_low": {
+      "states": 27638,
+      "transitions": 108049,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "B4_stuck_high": {
+      "states": 37110,
+      "transitions": 141964,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "MAF_stuck_low": {
+      "states": 27638,
+      "transitions": 108121,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "MAF_stuck_high": {
+      "states": 27638,
+      "transitions": 108121,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "REQ_CLOSE_stuck_low": {
+      "states": 30756,
+      "transitions": 118619,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "REQ_CLOSE_stuck_high": {
+      "states": 28934,
+      "transitions": 111448,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "REQ_EJ_FWD_stuck_low": {
+      "states": 27692,
+      "transitions": 108325,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "REQ_EJ_FWD_stuck_high": {
+      "states": 28934,
+      "transitions": 112251,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "REQ_EJ_BACK_stuck_low": {
+      "states": 27692,
+      "transitions": 108295,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "REQ_EJ_BACK_stuck_high": {
+      "states": 30482,
+      "transitions": 118521,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "AREA_FREE_stuck_low": {
+      "states": 29987,
+      "transitions": 114155,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "AREA_FREE_stuck_high": {
+      "states": 27692,
+      "transitions": 108213,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "MOULD_OPEN_stuck_low": {
+      "states": 27638,
+      "transitions": 108115,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "MOULD_OPEN_stuck_high": {
+      "states": 28396,
+      "transitions": 110755,
+      "P1_states": 0,
+      "P2_states": 420,
+      "P1_trace_len": null,
+      "P2_trace_len": 17
+     },
+     "MOULD_CLOSED_stuck_low": {
+      "states": 27888,
+      "transitions": 109041,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "MOULD_CLOSED_stuck_high": {
+      "states": 27972,
+      "transitions": 109291,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "EJ_FWD_stuck_low": {
+      "states": 27638,
+      "transitions": 108121,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "EJ_FWD_stuck_high": {
+      "states": 29426,
+      "transitions": 113391,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "EJ_BACK_stuck_low": {
+      "states": 27638,
+      "transitions": 108121,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "EJ_BACK_stuck_high": {
+      "states": 28522,
+      "transitions": 110607,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "CYCLE_ENABLE_stuck_low": {
+      "states": 27728,
+      "transitions": 108395,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "CYCLE_ENABLE_stuck_high": {
+      "states": 27650,
+      "transitions": 108166,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "zone_function_stuck_free": {
+      "states": 27692,
+      "transitions": 108213,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "robot_hold": {
+      "states": 27638,
+      "transitions": 110837,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "gate_forced": {
+      "states": 59032,
+      "transitions": 299411,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "gate_request": {
+      "states": 32931,
+      "transitions": 221919,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "robot_power_loss": {
+      "states": 30913,
+      "transitions": 104764,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "plc_power_loss": {
+      "states": 28163,
+      "transitions": 81892,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     },
+     "plc_power_loss_A6_high": {
+      "states": 32349,
+      "transitions": 92360,
+      "P1_states": 24,
+      "P2_states": 96,
+      "P1_trace_len": 39,
+      "P2_trace_len": 39
+     },
+     "imm_power_loss": {
+      "states": 37275,
+      "transitions": 129162,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     }
+    },
+    "states_total": 1367740,
+    "transitions_total": 5378560,
+    "P1_scenarios": [
+     "A6_stuck_high",
+     "plc_power_loss_A6_high"
+    ],
+    "P2_scenarios": [
+     "ZA7_stuck_high",
+     "A6_stuck_high",
+     "MOULD_OPEN_stuck_high",
+     "plc_power_loss_A6_high"
+    ]
+   },
+   "C": {
+    "title": "weakened: contact bridged, A6 straight from the robot output, early-enable program",
+    "scenarios": {
+     "none": {
+      "states": 15705,
+      "transitions": 53111,
+      "P1_states": 32,
+      "P2_states": 128,
+      "P1_trace_len": 42,
+      "P2_trace_len": 42
+     }
+    },
+    "states_total": 15705,
+    "transitions_total": 53111,
+    "P1_scenarios": [
+     "none"
+    ],
+    "P2_scenarios": [
+     "none"
+    ]
+   },
+   "D": {
+    "title": "early-enable program inside the full design (contact used, A6 gated by the PLC)",
+    "scenarios": {
+     "none": {
+      "states": 13759,
+      "transitions": 46971,
+      "P1_states": 0,
+      "P2_states": 0,
+      "P1_trace_len": null,
+      "P2_trace_len": null
+     }
+    },
+    "states_total": 13759,
+    "transitions_total": 46971,
+    "P1_scenarios": [],
+    "P2_scenarios": []
+   }
+  },
+  "scenarios": {
+   "none": "no fault",
+   "ZA6_stuck_low": "Mould closed (ZA6) stuck LOW; also covers a lost edge",
+   "ZA6_stuck_high": "Mould closed (ZA6) stuck HIGH; also covers a lost edge",
+   "ZA7_stuck_low": "Mould open position (ZA7) stuck LOW; also covers a lost edge",
+   "ZA7_stuck_high": "Mould open position (ZA7) stuck HIGH; also covers a lost edge",
+   "ZB2_stuck_low": "Enable operation with handling device / robot (ZB2) stuck LOW; also covers a lost edge",
+   "ZB2_stuck_high": "Enable operation with handling device / robot (ZB2) stuck HIGH; also covers a lost edge",
+   "ZB3_stuck_low": "Ejector back position (ZB3) stuck LOW; also covers a lost edge",
+   "ZB3_stuck_high": "Ejector back position (ZB3) stuck HIGH; also covers a lost edge",
+   "ZB4_stuck_low": "Ejector forward position (ZB4) stuck LOW; also covers a lost edge",
+   "ZB4_stuck_high": "Ejector forward position (ZB4) stuck HIGH; also covers a lost edge",
+   "A6_stuck_low": "Enable mould closure (A6) stuck LOW; also covers a lost edge",
+   "A6_stuck_high": "Enable mould closure (A6) stuck HIGH; also covers a lost edge",
+   "B3_stuck_low": "Enable ejector back (B3) stuck LOW; also covers a lost edge",
+   "B3_stuck_high": "Enable ejector back (B3) stuck HIGH; also covers a lost edge",
+   "B4_stuck_low": "Enable ejector forward (B4) stuck LOW; also covers a lost edge",
+   "B4_stuck_high": "Enable ejector forward (B4) stuck HIGH; also covers a lost edge",
+   "MAF_stuck_low": "Mould area free (one switch contact) (A3/C3) stuck LOW; also covers a lost edge",
+   "MAF_stuck_high": "Mould area free (one switch contact) (A3/C3) stuck HIGH; also covers a lost edge",
+   "REQ_CLOSE_stuck_low": "request Enable mould closure (DO[1]) stuck LOW; also covers a lost edge",
+   "REQ_CLOSE_stuck_high": "request Enable mould closure (DO[1]) stuck HIGH; also covers a lost edge",
+   "REQ_EJ_FWD_stuck_low": "request Enable ejector forward (DO[2]) stuck LOW; also covers a lost edge",
+   "REQ_EJ_FWD_stuck_high": "request Enable ejector forward (DO[2]) stuck HIGH; also covers a lost edge",
+   "REQ_EJ_BACK_stuck_low": "request Enable ejector back (DO[3]) stuck LOW; also covers a lost edge",
+   "REQ_EJ_BACK_stuck_high": "request Enable ejector back (DO[3]) stuck HIGH; also covers a lost edge",
+   "AREA_FREE_stuck_low": "monitoring copy of Mould area free (DO[10]) stuck LOW; also covers a lost edge",
+   "AREA_FREE_stuck_high": "monitoring copy of Mould area free (DO[10]) stuck HIGH; also covers a lost edge",
+   "MOULD_OPEN_stuck_low": "mould open, enter (DI[2]) stuck LOW; also covers a lost edge",
+   "MOULD_OPEN_stuck_high": "mould open, enter (DI[2]) stuck HIGH; also covers a lost edge",
+   "MOULD_CLOSED_stuck_low": "closure acknowledged (DI[3]) stuck LOW; also covers a lost edge",
+   "MOULD_CLOSED_stuck_high": "closure acknowledged (DI[3]) stuck HIGH; also covers a lost edge",
+   "EJ_FWD_stuck_low": "ejector forward (DI[4]) stuck LOW; also covers a lost edge",
+   "EJ_FWD_stuck_high": "ejector forward (DI[4]) stuck HIGH; also covers a lost edge",
+   "EJ_BACK_stuck_low": "ejector back (DI[5]) stuck LOW; also covers a lost edge",
+   "EJ_BACK_stuck_high": "ejector back (DI[5]) stuck HIGH; also covers a lost edge",
+   "CYCLE_ENABLE_stuck_low": "next cycle allowed (DI[8]) stuck LOW; also covers a lost edge",
+   "CYCLE_ENABLE_stuck_high": "next cycle allowed (DI[8]) stuck HIGH; also covers a lost edge",
+   "zone_function_stuck_free": "the robot zone function reports free while the gripper is inside: contact A3/C3 and DO[10] both stuck (common cause)",
+   "robot_hold": "robot stopped mid-path or mid-program, any time, any duration",
+   "gate_forced": "operator opens the gate without request (no guard locking)",
+   "gate_request": "operator requests access, opens, closes, resets",
+   "robot_power_loss": "robot controller loses power: outputs LOW, contacts open",
+   "plc_power_loss": "cell PLC loses power: all outputs LOW",
+   "plc_power_loss_A6_high": "cell PLC loses power and A6 goes HIGH, as EUROMAP 67 asks for a handling device that is switched off",
+   "imm_power_loss": "machine loses power: no movement, outputs LOW"
+  },
+  "counterexamples": {
+   "A/ZA7_stuck_high/P2": [
+    {
+     "step": "init",
+     "mould": "CLOSED",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "imm:process_done",
+     "mould": "CLOSED",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "imm:open_start",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_start",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "HOME>WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_done",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "plc:scan",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:wait_ok",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "fault:ZA7_stuck_high",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": true,
+     "closing": false
+    },
+    {
+     "step": "plc:scan",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": true,
+     "closing": false
+    },
+    {
+     "step": "rob:wait_ok",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": true,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": true,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": true,
+     "closing": false
+    },
+    {
+     "step": "rob:move_start",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "WAIT_IMM>MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": true,
+     "closing": false
+    }
+   ],
+   "B/A6_stuck_high/P1": [
+    {
+     "step": "init",
+     "mould": "CLOSED",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "imm:process_done",
+     "mould": "CLOSED",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "imm:open_start",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "imm:open_done",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_start",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME>WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_done",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "plc:scan",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:wait_ok",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "plc:scan",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:wait_ok",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_start",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM>MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_done",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_start",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "MOULD_IN>GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_done",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "cell:part_gripped",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "plc:scan",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "imm:ej_fwd_done",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "plc:scan",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:wait_ok",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:wait_ok",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_start",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "GRIP>MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_done",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "plc:scan",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "imm:ej_back_done",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "fault:A6_stuck_high",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": true,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": true,
+     "closing": false
+    },
+    {
+     "step": "imm:close_start",
+     "mould": "CLOSING",
+     "ej": "BACK",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": true,
+     "ZA7": false,
+     "MOULD_OPEN": true,
+     "fault": true,
+     "closing": true
+    }
+   ],
+   "C/none/P1": [
+    {
+     "step": "init",
+     "mould": "CLOSED",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "imm:process_done",
+     "mould": "CLOSED",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "imm:open_start",
+     "mould": "OPENING",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": false,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "imm:open_done",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_start",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "HOME>WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_done",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "plc:scan",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:wait_ok",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": false,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "plc:scan",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:wait_ok",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM",
+     "inside": false,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_start",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "WAIT_IMM>MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_done",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_start",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "MOULD_IN>GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_done",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "cell:part_gripped",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "plc:scan",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "imm:ej_fwd_done",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "plc:scan",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:wait_ok",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:wait_ok",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "GRIP",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_start",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "GRIP>MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:move_done",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "plc:scan",
+     "mould": "OPEN",
+     "ej": "FWD",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "imm:ej_back_done",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "plc:scan",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:wait_ok",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": false,
+     "A6": false,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "rob:instr",
+     "mould": "OPEN",
+     "ej": "BACK",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": true,
+     "A6": true,
+     "ZA7": true,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": false
+    },
+    {
+     "step": "imm:close_start",
+     "mould": "CLOSING",
+     "ej": "BACK",
+     "robot": "MOULD_IN",
+     "inside": true,
+     "REQ_CLOSE": true,
+     "A6": true,
+     "ZA7": false,
+     "MOULD_OPEN": true,
+     "fault": false,
+     "closing": true
+    }
+   ]
+  },
+  "liveness": {
+   "states": 1125,
+   "can_reach_next_shot": 1125,
+   "deadlocks": 0
+  },
+  "signals": {
+   "ZA6": [
+    "ZA6",
+    "IMM",
+    "PLC",
+    "Mould closed"
+   ],
+   "ZA7": [
+    "ZA7",
+    "IMM",
+    "PLC",
+    "Mould open position"
+   ],
+   "ZB2": [
+    "ZB2",
+    "IMM",
+    "PLC",
+    "Enable operation with handling device / robot"
+   ],
+   "ZB3": [
+    "ZB3",
+    "IMM",
+    "PLC",
+    "Ejector back position"
+   ],
+   "ZB4": [
+    "ZB4",
+    "IMM",
+    "PLC",
+    "Ejector forward position"
+   ],
+   "A6": [
+    "A6",
+    "PLC",
+    "IMM",
+    "Enable mould closure"
+   ],
+   "B3": [
+    "B3",
+    "PLC",
+    "IMM",
+    "Enable ejector back"
+   ],
+   "B4": [
+    "B4",
+    "PLC",
+    "IMM",
+    "Enable ejector forward"
+   ],
+   "MAF": [
+    "A3/C3",
+    "ROBOT",
+    "IMM",
+    "Mould area free (one switch contact)"
+   ],
+   "REQ_CLOSE": [
+    "DO[1]",
+    "ROBOT",
+    "PLC",
+    "request Enable mould closure"
+   ],
+   "REQ_EJ_FWD": [
+    "DO[2]",
+    "ROBOT",
+    "PLC",
+    "request Enable ejector forward"
+   ],
+   "REQ_EJ_BACK": [
+    "DO[3]",
+    "ROBOT",
+    "PLC",
+    "request Enable ejector back"
+   ],
+   "AREA_FREE": [
+    "DO[10]",
+    "ROBOT",
+    "PLC",
+    "monitoring copy of Mould area free"
+   ],
+   "MOULD_OPEN": [
+    "DI[2]",
+    "PLC",
+    "ROBOT",
+    "mould open, enter"
+   ],
+   "MOULD_CLOSED": [
+    "DI[3]",
+    "PLC",
+    "ROBOT",
+    "closure acknowledged"
+   ],
+   "EJ_FWD": [
+    "DI[4]",
+    "PLC",
+    "ROBOT",
+    "ejector forward"
+   ],
+   "EJ_BACK": [
+    "DI[5]",
+    "PLC",
+    "ROBOT",
+    "ejector back"
+   ],
+   "CYCLE_ENABLE": [
+    "DI[8]",
+    "PLC",
+    "ROBOT",
+    "next cycle allowed"
+   ]
+  },
+  "fault_scenarios": 44
+ },
+ "timed": {
+  "side_6axis": {
+   "cycles_measured": 3,
+   "removal_s": 1.9559999999999889,
+   "mould_open_s": 1.9579999999999984,
+   "cycle_s": 48.03,
+   "removal_budget_s": 1.9418034803617799,
+   "cycle_budget_s": 48.0123985612596,
+   "p1_seen": false,
+   "p2_seen": false,
+   "alarm": false,
+   "states_visited": 368,
+   "observable_states": 87,
+   "observable_states_in_model": 87
+  },
+  "top_6axis": {
+   "cycles_measured": 3,
+   "removal_s": 2.1759999999999877,
+   "mould_open_s": 2.1779999999999973,
+   "cycle_s": 48.25,
+   "removal_budget_s": 2.1594713892604416,
+   "cycle_budget_s": 48.23006647015826,
+   "p1_seen": false,
+   "p2_seen": false,
+   "alarm": false,
+   "states_visited": 363
+  }
+ },
+ "plc_scans_distinct": 175224
+}
