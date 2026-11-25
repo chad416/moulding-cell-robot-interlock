@@ -91,6 +91,7 @@ themselves. The fault list is in [DOSSIER.md §8](DOSSIER.md#8-modelling-and-sim
 | Model | Machine, robot program, PLC and cell devices as communicating state machines; faults; variants | `cell/system.py` |
 | Checker | Explicit-state breadth-first exploration, shortest counter-example, reachability of the next shot | `cell/checker.py` |
 | In the loop | Timed run with the same transition function | `cell/loop.py` |
+| PLC test bench | Self-checking bench for PLCSIM: seven cases replayed scan by scan against `CELL_PLC`, tables generated from the model | `plc/test/`, `cell/bench.py`, `scripts/make_testbench.py`, [docs/PLCSIM_RUN.md](docs/PLCSIM_RUN.md) |
 | Results | Numbers, handshake trace, counter-example traces as text | `results/` |
 
 ## Run it
@@ -103,9 +104,22 @@ python -m scripts.run_studies          # results/studies.json, traces.json, coun
 python -m scripts.make_figures
 python -m scripts.make_tables
 python plc/st_to_scl.py plc/st/cell_plc.st plc/scl/CellPlc.scl
+python -m scripts.make_testbench       # plc/test, results/testbench_cases.json, docs/PLCSIM_RUN.md
 ```
 
 Without the compiled controller the physics and interface tests still run; the model tests are skipped.
+
+TIA Portal V18 (Windows, Openness), not part of CI:
+
+```powershell
+# the block alone
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\tia_build.ps1 -Blocks "CellPlc" -PlcDir plc\scl
+# the test project with the self-checking bench, saved as an archive for PLCSIM
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\tia_build.ps1 -ReplaceMain `
+    -Sources plc\scl\CellPlc.scl,plc\test\scl\TbBench.scl,plc\test\scl\DB_TestResult.scl,plc\test\scl\Main_Test.scl `
+    -OutDir C:\TIA_build\plcsim -Archive C:\TIA_build\plcsim\cell38_plcsim_test.zap18 `
+    -ResultFile results\tia_compile_testbench.txt
+```
 CI builds matiec at a pinned commit, compiles the ST code, runs all tests and the full study, asserts its key
 results and checks that the SCL export matches the ST source.
 
@@ -121,8 +135,11 @@ results and checks that the SCL export matches the ST source.
   assumed. The thermal diffusivity is computed from room-temperature datasheet values.
 - Cell layout, floor space, machine times, production hours and OEE are assumed.
 - The ST code was compiled with matiec and run in the loop. The SCL export compiles in TIA Portal V18 for an
-  S7-1513 with 0 errors and 0 warnings (`scripts/tia_build.ps1`, record in `results/tia_compile.txt`). It was not
-  run on a PLC or in PLCSIM. The LS program was run only by the interpreter in this repository. It was not
+  S7-1513 with 0 errors and 0 warnings (`scripts/tia_build.ps1`, record in `results/tia_compile.txt`). The
+  test project with the self-checking bench compiles there too and is saved as a project archive
+  (`results/tia_compile_testbench.txt`). The bench passes against the matiec build in CI. It has not been run in
+  PLCSIM or on a PLC by this repository; [docs/PLCSIM_RUN.md](docs/PLCSIM_RUN.md) says how to run it and which values
+  mean pass. The LS program was run only by the interpreter in this repository. It was not
   compiled with the robot maker's offline compiler and not run on a robot controller or its simulator.
 - EN 201, EN ISO 10218-2 and EN ISO 13849-1 are paywalled. They were not read; only the public sources named in
   the dossier were. A real cell needs the standards, a risk assessment and a validated safety controller.

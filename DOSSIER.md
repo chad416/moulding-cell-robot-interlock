@@ -458,9 +458,11 @@ Effects are the checker results of §8.3 for variant A.
 | SR-11 | every state can reach the next shot; no state without successor | `tests/test_model.py` |
 | Timed run | no alarm, removal time within the budget, states inside the model | `tests/test_model.py` |
 | PLC watchdog | scan sequence on the compiled block | `tests/test_model.py` |
+| PLC block on a second compiler | self-checking bench `TB_BENCH`: seven cases (normal cycles, robot late, area-free signal lost during closing, access on request, gate opened and reset, conveyor not ready, closing watchdog) replayed scan by scan; inputs and expected outputs recorded from the model; passes on the matiec build; a wrong expected bit makes it fail at the right case and scan | `plc/test/`, `tests/test_bench.py`, `docs/PLCSIM_RUN.md` |
 
 Validation against hardware: none. Done: the SCL export compiles in TIA Portal V18 with 0 errors and 0 warnings
-(`results/tia_compile.txt`). Not done: compiling the LS program with the robot maker's offline
+(`results/tia_compile.txt`). The test project with the bench compiles and is archived for PLCSIM
+(`results/tia_compile_testbench.txt`); the PLCSIM run itself is not part of this repository yet. Not done: compiling the LS program with the robot maker's offline
 compiler, running it on a robot controller or its simulator, any test on a machine.
 
 ## 12. Assumed versus sourced, and limits

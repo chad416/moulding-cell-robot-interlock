@@ -9,7 +9,7 @@ SCL dialect that TIA Portal imports as an external source file:
   * DWORD#n literals become DW#16#n (hex)
   * block headers get TIA attributes
 
-Usage: python plc/st_to_scl.py <source.st> <target.scl>
+Usage: python plc/st_to_scl.py <source.st> <target.scl> [function blocks from other sources ...]
 
 Not compiled here: TIA Portal is not part of CI. Import it with
 "External source files > Add new external file", then "Generate blocks
@@ -107,7 +107,8 @@ def convert_body(toks: list[str], names: set[str]) -> str:
     return "".join(out)
 
 
-def convert(src: str) -> str:
+def convert(src: str, fb_types: tuple[str, ...] = ()) -> str:
+    """fb_types: function blocks defined in another source that this one declares instances of."""
     USER_FUNCS.update(n.upper() for n in re.findall(r"\bFUNCTION\s+(\w+)\s*:", src))
     blocks = re.findall(r"(FUNCTION_BLOCK|FUNCTION)\s+(\w+)(.*?)\b(END_FUNCTION_BLOCK|END_FUNCTION)\b", src, flags=re.S)
     header = re.match(r"\s*(\(\*.*?\*\))", src, flags=re.S)
@@ -123,6 +124,8 @@ def convert(src: str) -> str:
         decl, code = body[: m.end()], body[m.end():]
         names = declared_names(decl)
         decl = decl.replace("DWORD#", "DW#16#")
+        for fb in {b[1] for b in blocks} | set(fb_types):       # instance declarations: quoted block name
+            decl = re.sub(rf":\s*{fb}\s*;", f': "{fb}";', decl)
         if kind == "FUNCTION":
             ret = re.match(r"\s*:\s*(\w+)", decl)
             rest = decl[ret.end():]

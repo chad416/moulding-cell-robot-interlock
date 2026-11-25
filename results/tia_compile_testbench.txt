@@ -1,0 +1,16 @@
+﻿TIA Portal V18, CPU OrderNumber:6ES7 513-1AL02-0AB0/V2.9, 2026-11-25 04:22
+deleted default Main
+generated CellPlc
+generated TbBench
+generated DB_TestResult
+generated Main_Test
+COMPILE Success  errors=0  warnings=0
+  Success  PLC_1  
+    Success  Program blocks  
+      Success  TB_BENCH (FB2)  Block was successfully compiled.
+      Success  CELL_PLC (FB1)  Block was successfully compiled.
+      Success  Main (OB1)  Block was successfully compiled.
+  Success    Compiling finished (errors: 0; warnings: 0)
+SIMULATION SUPPORT enabled; COMPILE Success  errors=0  warnings=0
+ARCHIVE cell38_plcsim_test.zap18  bytes=504532
+

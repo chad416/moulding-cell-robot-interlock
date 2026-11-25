@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0 (2026-11-25)
+- Self-checking PLC test bench for PLCSIM (`plc/test`): seven cases, tables generated from the cell model,
+  result data block `DB_TestResult`. Runs against the matiec build in CI; a broken expectation is shown to fail.
+- `scripts/tia_build.ps1`: any SCL sources by path, own OB1, project archive.
+
 ## 1.0.1 (2026-11-25)
 - PLC block: the sequence state is an internal variable and is copied to the output `state` at the end, so no
   output is read back. The SCL export compiles in TIA Portal V18 with 0 errors and 0 warnings

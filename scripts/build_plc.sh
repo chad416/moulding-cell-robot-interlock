@@ -14,3 +14,5 @@ mkdir -p "$OUT/iec"
 "$PYTHON" plc/gen_shim.py plc/st/cell_plc.st "$OUT" CELL_PLC
 gcc -O2 -fPIC -shared -w -I "$OUT/iec" -I "$MATIEC_DIR/lib/C" -o "$OUT/libplc.so" "$OUT/shim.c" -lm
 echo "built $OUT/libplc.so"
+# the self-checking test bench of plc/test, same toolchain
+MATIEC_DIR="$MATIEC_DIR" PYTHON="$PYTHON" bash scripts/build_bench.sh
