@@ -62,6 +62,38 @@ stopping distances and reaction times, two faults at once, wiring errors, recove
 and set-up modes, core pullers, the optional intermediate mould-opening position, and the safety circuits
 themselves. The fault list is in [DOSSIER.md §8](DOSSIER.md#8-modelling-and-simulation).
 
+## Run of the TP program on a FANUC virtual controller
+
+`robot/UNLOAD_IMM.ls` was loaded into a FANUC virtual controller (the controller software running in the maker's
+simulator, no hardware), translated there, and run against this repository's machine model and compiled PLC block
+(`scripts/vc_run.ps1`, `scripts/vc_plc_bridge.py`). Results, generated from `results/virtual_controller_run.json`:
+
+<!-- TABLE:vc -->
+- **Controller:** R-30iB Plus virtual controller, software V9.40, arm M-710iD/70. The study's arm is the M-20iD/25; the positions are a shortened copy of the layout (entry stroke 500 mm, grip offset 90 mm) around the tool position the controller had at the start.
+- **Translation:** the controller accepted the LS file (FTP upload, exit code 0) and lists 72 instructions; 72 of 72 are the same as in `robot/UNLOAD_IMM.ls`.
+- **Normal cycles:** 4 cycles ran. In each, 24 handshake edges and 268 ordered pairs of edges were compared with the interpreter run; 0 pairs came in the other order and 0 edges were missing.
+- **Closure handshake:** REQ_CLOSE, A6, Mould closed, MOULD_CLOSED, REQ_CLOSE off, MOULD_CLOSED off came in this order in 4 of 4 cycles. P1 or P2 states seen by the model during the run: none.
+- **Removal time on this arm:** 2.89 to 3.51 s of controller time. It is not comparable with the budget of the study: other arm, shorter path, and the ejector and vacuum times run on the PC clock.
+- **Mould open never comes:** the robot stood 16.0 s of controller time at line 25 (the WAIT without time-out), at the start position, with the area free and no closure request, until the mould was released.
+- **Time-out path:** with "Ejector forward position" withheld, the WAIT ended after 4.94 s of controller time (programmed 5.00 s). The program switched REQ_CLOSE off, set FAULT and stopped with `INTP-213 UNLOAD_IMM handshake fault (UNLOAD_IMM, 72) UALM[1]` (task paused). The PLC block went to S_FAULT / F_ROBOT; A6 stayed LOW.
+- **Zone signal:** in a first run the script set DO[10] from a plane 5 mm beyond the start position. The joint move back from the conveyor clipped that plane 4 times, for up to 89 ms, and the model flagged P2. With a box that starts 30 mm beyond the start position this did not happen. A real zone needs such a margin, or a linear move into the start position.
+- **Clock:** the virtual controller ran at 0.93 controller seconds per PC second, so robot times are given in controller time ($FAST_CLOCK, 2 ms per tick).
+<!-- /TABLE -->
+
+![Handshake on the virtual controller](docs/img/vc_handshake_timing.png)
+
+What this shows: this controller software accepts the program text as it is in the repository, and the program
+executed by the controller produces the same handshake order as the in-repo interpreter, including the wait without
+time-out and one WAIT time-out path. What it does not show: nothing ran on a real controller, robot or machine. The
+arm is not the one of the study, so no time of the study is confirmed. DO[10] "mould area free" was set by the test
+script from the tool position, not by a zone function of the controller, and not by a safety-rated function. The
+machine is still the model. Only the paths listed above were run. The weakened program variant was not run there.
+
+Records: `results/virtual_controller_run.jsonl` (raw log), `results/virtual_controller_listing.ls`,
+`results/virtual_controller_active_alarms.txt`, `results/virtual_controller_io_extract.txt`. The pictures
+`docs/img/vc_program_listing.png` and `docs/img/vc_alarm_io.png` are renderings of text that the controller returned
+over FTP, not captures of a pendant or of the simulator window.
+
 ## Figures (all produced by `scripts/make_figures.py` from the runs)
 
 | File | Shows |
@@ -71,6 +103,8 @@ themselves. The fault list is in [DOSSIER.md §8](DOSSIER.md#8-modelling-and-sim
 | `docs/img/handshake_timing.png` | timing diagram of the EUROMAP 67 handshake from the in-the-loop run |
 | `docs/img/state_space.png` | reachable states per scenario for variants A and B, with the scenarios that reach P1 or P2 |
 | `docs/img/counterexample.png` | counter-example trace of the weakened handshake (variant C) |
+| `docs/img/vc_handshake_timing.png` | the same handshake with the TP program running on a FANUC virtual controller (from `results/virtual_controller_run.json`) |
+| `docs/img/vc_program_listing.png`, `docs/img/vc_alarm_io.png` | the program as the virtual controller lists it; its active alarm and the test signals after the time-out path (`scripts/vc_screens.py`, text renderings) |
 
 ![Cycle breakdown](docs/img/cycle_breakdown.png)
 
@@ -92,6 +126,7 @@ themselves. The fault list is in [DOSSIER.md §8](DOSSIER.md#8-modelling-and-sim
 | Checker | Explicit-state breadth-first exploration, shortest counter-example, reachability of the next shot | `cell/checker.py` |
 | In the loop | Timed run with the same transition function | `cell/loop.py` |
 | PLC test bench | Self-checking bench for PLCSIM: seven cases replayed scan by scan against `CELL_PLC`, tables generated from the model | `plc/test/`, `cell/bench.py`, `scripts/make_testbench.py`, [docs/PLCSIM_RUN.md](docs/PLCSIM_RUN.md) |
+| Virtual controller run | Run script for a FANUC virtual controller, bridge to the machine model and PLC block, evaluation, records | `scripts/vc_run.ps1`, `scripts/vc_plc_bridge.py`, `scripts/vc_report.py`, `scripts/vc_screens.py` |
 | Results | Numbers, handshake trace, counter-example traces as text | `results/` |
 
 ## Run it
@@ -141,8 +176,9 @@ results and checks that the SCL export matches the ST source.
   S7-PLCSIM Advanced V7.0 Upd1 under TIA Portal V20 Update 7, which upgraded the project from V18: 7 of 7 bench
   cases passed ([docs/PLCSIM_RUN.md](docs/PLCSIM_RUN.md) has the record, the observed values and the screenshots).
   The bench is an open-loop replay of recorded signal tables on a simulated CPU; the block has not been run on a
-  real PLC. The LS program was run only by the interpreter in this repository. It was not
-  compiled with the robot maker's offline compiler and not run on a robot controller or its simulator.
+  real PLC. The LS program was translated and run by a FANUC virtual controller (software
+  V9.40, section above) and by the interpreter in this repository. It was not compiled with the robot maker's
+  offline compiler and not run on a real robot controller. The weakened variant ran only in the interpreter.
 - EN 201, EN ISO 10218-2 and EN ISO 13849-1 are paywalled. They were not read; only the public sources named in
   the dossier were. A real cell needs the standards, a risk assessment and a validated safety controller.
 

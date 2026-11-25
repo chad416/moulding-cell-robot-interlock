@@ -171,8 +171,47 @@ def t_timed(d, cfg):
     return "\n".join(rows)
 
 
+def t_vc(d, cfg):
+    v = json.loads((ROOT / "results" / "virtual_controller_run.json").read_text(encoding="utf-8"))
+    c, tr, tmo, hold, z = v["controller"], v["translation"], v["timeout_path"], v["mould_open_never_comes"], v["zone_5mm_run"]
+    comp = v["order_vs_interpreter"]
+    rem = v["removal_controller_s"]
+    lay = v["layout_offsets_mm"]
+    return "\n".join([
+        f"- **Controller:** {c['type']}, software {c['software']}, arm {c['arm']}. The study's arm is the {v['study_arm']}; "
+        f"the positions are a shortened copy of the layout (entry stroke {lay['MOULD_IN'][0]} mm, grip offset "
+        f"{lay['GRIP'][1]} mm) around the tool position the controller had at the start.",
+        f"- **Translation:** the controller accepted the LS file (FTP upload, exit code {tr['ftp_exit']}) and lists "
+        f"{tr['instructions_controller']} instructions; {tr['instructions_repo'] - len(tr['differences'])} of "
+        f"{tr['instructions_repo']} are the same as in `robot/UNLOAD_IMM.ls`.",
+        f"- **Normal cycles:** {len(v['cycles'])} cycles ran. In each, {comp[0]['edges_compared']} handshake edges and "
+        f"{comp[0]['ordered_pairs']} ordered pairs of edges were compared with the interpreter run; "
+        f"{sum(len(x['inversions']) for x in comp)} pairs came in the other order and "
+        f"{sum(len(x['edges_missing']) for x in comp)} edges were missing.",
+        f"- **Closure handshake:** REQ_CLOSE, A6, Mould closed, MOULD_CLOSED, REQ_CLOSE off, MOULD_CLOSED off came in this "
+        f"order in {v['closure_handshake_in_order_cycles']} of {len(v['cycles'])} cycles. P1 or P2 states seen by the model during the run: "
+        f"{'none' if not (v['p1_seen'] or v['p2_seen']) else 'yes'}.",
+        f"- **Removal time on this arm:** {min(rem):.2f} to {max(rem):.2f} s of controller time. It is not comparable "
+        f"with the budget of the study: other arm, shorter path, and the ejector and vacuum times run on the PC clock.",
+        f"- **Mould open never comes:** the robot stood {hold['waited_controller_s']:.1f} s of controller time at "
+        f"line {hold['line']} (the WAIT without time-out), at the start position, with the area free and no closure "
+        f"request, until the mould was released.",
+        f"- **Time-out path:** with \"Ejector forward position\" withheld, the WAIT ended after "
+        f"{tmo['controller_s']:.2f} s of controller time (programmed {tmo['wait_timeout_program_s']:.2f} s). The program "
+        f"switched REQ_CLOSE off, set FAULT and stopped with `{tmo['newest_alarm_naming_the_program']}` "
+        f"(task {tmo['task_status']}). The PLC block went to {tmo['plc_state']} / {tmo['plc_fault']}; A6 stayed "
+        f"{'LOW' if not tmo['a6_at_end'] else 'HIGH'}.",
+        f"- **Zone signal:** in a first run the script set DO[10] from a plane {5} mm beyond the start position. The "
+        f"joint move back from the conveyor clipped that plane {z['false_inside_events']} times, for up to "
+        f"{z['longest_ms']} ms, and the model flagged P2. With a box that starts {v['zone_margin_mm']:g} mm beyond the "
+        f"start position this did not happen. A real zone needs such a margin, or a linear move into the start position.",
+        f"- **Clock:** the virtual controller ran at {v['clock']['controller_seconds_per_pc_second']:.2f} controller "
+        f"seconds per PC second, so robot times are given in controller time ($FAST_CLOCK, {v['clock']['tick_ms']} ms per tick).",
+    ])
+
+
 TABLES = {"findings": t_findings, "alternatives": t_alternatives, "cycle": t_cycle, "inputs": t_inputs,
-          "signals": t_signals, "matrix": t_matrix, "faults": t_faults, "timed": t_timed}
+          "signals": t_signals, "matrix": t_matrix, "faults": t_faults, "timed": t_timed, "vc": t_vc}
 
 
 def main():

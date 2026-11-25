@@ -85,7 +85,7 @@ DO[3:REQ_EJ_BACK]=OFF
 DO[1:REQ_CLOSE]=ON
 L PR[2:WAIT_IMM] 2000mm/sec FINE
 """
-REST = """!Downstream while the mould closes
+REST = """!Downstream, mould is closing
 J PR[5:CUT] 100% FINE
 DO[4:AT_CUT]=ON
 WAIT DI[6:CUT_DONE]=ON TIMEOUT,LBL[99]

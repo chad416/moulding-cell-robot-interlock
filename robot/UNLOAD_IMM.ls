@@ -67,7 +67,7 @@ CONTROL_CODE	= 00000000 00000000;
   45:  WAIT DO[10:MOULD_AREA_FREE]=ON TIMEOUT,LBL[99] ;
   46:  IF RI[1:PART_OK]=OFF,JMP LBL[99] ;
   47:  DO[1:REQ_CLOSE]=ON ;
-  48:  !Downstream while the mould closes ;
+  48:  !Downstream, mould is closing ;
   49:  J PR[5:CUT] 100% FINE ;
   50:  DO[4:AT_CUT]=ON ;
   51:  WAIT DI[6:CUT_DONE]=ON TIMEOUT,LBL[99] ;

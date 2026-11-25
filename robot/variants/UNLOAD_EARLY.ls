@@ -66,7 +66,7 @@ CONTROL_CODE	= 00000000 00000000;
   44:  DO[3:REQ_EJ_BACK]=OFF ;
   45:  DO[1:REQ_CLOSE]=ON ;
   46:  L PR[2:WAIT_IMM] 2000mm/sec FINE ;
-  47:  !Downstream while the mould closes ;
+  47:  !Downstream, mould is closing ;
   48:  J PR[5:CUT] 100% FINE ;
   49:  DO[4:AT_CUT]=ON ;
   50:  WAIT DI[6:CUT_DONE]=ON TIMEOUT,LBL[99] ;

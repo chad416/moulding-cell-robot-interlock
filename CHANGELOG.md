@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0 (2026-11-25)
+- `robot/UNLOAD_IMM.ls` translated and run on a FANUC virtual controller (R-30iB Plus virtual controller, software
+  V9.40, arm M-710iD/70) against the machine model and the PLC block: run script, bridge, evaluation, records,
+  timing figure. One TP comment shortened to 32 characters so that the controller's listing equals the source.
+
 ## 1.1.1 (2026-11-25)
 - Test bench run in S7-PLCSIM Advanced V7.0 Upd1 under TIA Portal V20 Update 7 (project upgraded from V18; two CPU
   protection settings set by hand so that the hardware compiles): 7 of 7 cases passed. Record, observed values and

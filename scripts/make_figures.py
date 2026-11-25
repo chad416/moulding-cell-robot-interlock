@@ -174,6 +174,45 @@ def fig_counterexample(d):
     plt.close(fig)
 
 
+def fig_vc(d):
+    """Handshake of one cycle on the virtual controller (results/virtual_controller_run.json)."""
+    cyc = d["cycles"][min(2, len(d["cycles"]) - 1)]
+    show = [("ZA7", "ZA7 Mould open position"), ("MOULD_OPEN", "DI[2] MOULD_OPEN"),
+            ("MAF", "DO[10] / A3-C3 Mould area free"), ("B4", "B4 Enable ejector forward"),
+            ("ZB4", "ZB4 Ejector forward position"), ("B3", "B3 Enable ejector back"),
+            ("ZB3", "ZB3 Ejector back position"), ("REQ_CLOSE", "DO[1] REQ_CLOSE"),
+            ("A6", "A6 Enable mould closure"), ("ZA6", "ZA6 Mould closed"), ("MOULD_CLOSED", "DI[3] MOULD_CLOSED")]
+    start = {"ZA7": 0, "MOULD_OPEN": 0, "MAF": 1, "B4": 0, "ZB4": 0, "B3": 0, "ZB3": 1, "REQ_CLOSE": 0, "A6": 0,
+             "ZA6": 0, "MOULD_CLOSED": 0}
+    t_end = max(t for t, _ in cyc["edges"]) + 0.6
+    fig, ax = plt.subplots(figsize=(10.2, 5.0))
+    for i, (key, lab) in enumerate(show):
+        ts, vs, v = [-0.6], [start[key]], start[key]
+        for t, edges in cyc["edges"]:
+            for e in edges:
+                name, val = e.split("=")
+                if name == key:
+                    ts.append(t)
+                    v = int(val)
+                    vs.append(v)
+        ts.append(t_end)
+        vs.append(v)
+        y0 = (len(show) - 1 - i) * 1.4
+        col = LIMIT if key in ("MAF", "A6") else (C[0] if key.startswith("Z") else (C[2] if key.startswith("B") else INK2))
+        ax.step(ts, [y0 + 0.9 * x for x in vs], where="post", color=col, lw=1.5)
+        ax.text(-0.75, y0 + 0.3, lab, ha="right", va="center", fontsize=8, color=INK)
+    ax.set_xlim(-0.6, t_end)
+    ax.set_ylim(-0.4, len(show) * 1.4 + 0.3)
+    ax.set_yticks([])
+    c = d["controller"]
+    ax.set_xlabel('time after "Mould open position" (s, PC clock)')
+    ax.set_title(f'TP program on the {c["type"]}, software {c["software"]}, arm {c["arm"]}; machine model and PLC block in the loop',
+                 fontsize=9, loc="left")
+    ax.grid(axis="y", visible=False)
+    ax.spines["left"].set_visible(False)
+    save(fig, "vc_handshake_timing.png")
+
+
 def main():
     d = json.loads((ROOT / "results" / "studies.json").read_text(encoding="utf-8"))
     tr = json.loads((ROOT / "results" / "traces.json").read_text(encoding="utf-8"))
@@ -182,6 +221,9 @@ def main():
     fig_handshake(tr)
     fig_state_space(d)
     fig_counterexample(d)
+    vc = ROOT / "results" / "virtual_controller_run.json"
+    if vc.exists():
+        fig_vc(json.loads(vc.read_text(encoding="utf-8")))
     print("figures written to", IMG)
 
 

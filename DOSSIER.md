@@ -458,14 +458,34 @@ Effects are the checker results of §8.3 for variant A.
 | SR-11 | every state can reach the next shot; no state without successor | `tests/test_model.py` |
 | Timed run | no alarm, removal time within the budget, states inside the model | `tests/test_model.py` |
 | PLC watchdog | scan sequence on the compiled block | `tests/test_model.py` |
+| TP program on the maker's controller software | LS file translated by a FANUC virtual controller; listing compared instruction by instruction; four cycles, the wait for a mould that does not open, one WAIT time-out; order of handshake edges compared with the interpreter run | `scripts/vc_run.ps1`, `scripts/vc_report.py`, `tests/test_virtual_controller.py`, `results/virtual_controller_run.*` |
 | PLC block on a second compiler | self-checking bench `TB_BENCH`: seven cases (normal cycles, robot late, area-free signal lost during closing, access on request, gate opened and reset, conveyor not ready, closing watchdog) replayed scan by scan; inputs and expected outputs recorded from the model; passes on the matiec build; a wrong expected bit makes it fail at the right case and scan | `plc/test/`, `tests/test_bench.py`, `docs/PLCSIM_RUN.md` |
 
 Validation against hardware: none. Done: the SCL export compiles in TIA Portal V18 with 0 errors and 0 warnings
 (`results/tia_compile.txt`). The test project with the bench compiles and is archived for PLCSIM
 (`results/tia_compile_testbench.txt`). That project was upgraded to TIA Portal V20 and run in S7-PLCSIM Advanced
 V7.0 Upd1: 7 of 7 bench cases passed (`docs/PLCSIM_RUN.md`). The bench is an open-loop replay on a simulated CPU, so
-this is a second compiler agreeing with the first, not a test on hardware. Not done: compiling the LS program with the robot maker's offline
-compiler, running it on a robot controller or its simulator, any test on a machine.
+this is a second compiler agreeing with the first, not a test on hardware. The TP program was translated and run by a FANUC
+virtual controller (R-30iB Plus virtual controller, software V9.40, arm M-710iD/70) against the machine model and
+the PLC block; results below. Not done: compiling the LS program with the robot maker's offline compiler, running
+it on a real robot controller, any test on a machine.
+
+Run on the virtual controller (generated from `results/virtual_controller_run.json`):
+
+<!-- TABLE:vc -->
+- **Controller:** R-30iB Plus virtual controller, software V9.40, arm M-710iD/70. The study's arm is the M-20iD/25; the positions are a shortened copy of the layout (entry stroke 500 mm, grip offset 90 mm) around the tool position the controller had at the start.
+- **Translation:** the controller accepted the LS file (FTP upload, exit code 0) and lists 72 instructions; 72 of 72 are the same as in `robot/UNLOAD_IMM.ls`.
+- **Normal cycles:** 4 cycles ran. In each, 24 handshake edges and 268 ordered pairs of edges were compared with the interpreter run; 0 pairs came in the other order and 0 edges were missing.
+- **Closure handshake:** REQ_CLOSE, A6, Mould closed, MOULD_CLOSED, REQ_CLOSE off, MOULD_CLOSED off came in this order in 4 of 4 cycles. P1 or P2 states seen by the model during the run: none.
+- **Removal time on this arm:** 2.89 to 3.51 s of controller time. It is not comparable with the budget of the study: other arm, shorter path, and the ejector and vacuum times run on the PC clock.
+- **Mould open never comes:** the robot stood 16.0 s of controller time at line 25 (the WAIT without time-out), at the start position, with the area free and no closure request, until the mould was released.
+- **Time-out path:** with "Ejector forward position" withheld, the WAIT ended after 4.94 s of controller time (programmed 5.00 s). The program switched REQ_CLOSE off, set FAULT and stopped with `INTP-213 UNLOAD_IMM handshake fault (UNLOAD_IMM, 72) UALM[1]` (task paused). The PLC block went to S_FAULT / F_ROBOT; A6 stayed LOW.
+- **Zone signal:** in a first run the script set DO[10] from a plane 5 mm beyond the start position. The joint move back from the conveyor clipped that plane 4 times, for up to 89 ms, and the model flagged P2. With a box that starts 30 mm beyond the start position this did not happen. A real zone needs such a margin, or a linear move into the start position.
+- **Clock:** the virtual controller ran at 0.93 controller seconds per PC second, so robot times are given in controller time ($FAST_CLOCK, 2 ms per tick).
+<!-- /TABLE -->
+
+Limits of that run: other arm than the study (times not comparable), shortened positions, DO[10] set by the test
+script from the tool position, machine still the model, only the listed paths, no safety function involved.
 
 ## 12. Assumed versus sourced, and limits
 
@@ -493,6 +513,8 @@ compiler, running it on a robot controller or its simulator, any test on a machi
 | Watchdog expiry is free in the model | a fixed small preset would hide runs with many scans in S_CLOSE |
 | ST as source, SCL generated | one source of truth; the ST can be compiled and run without TIA Portal |
 | The sequence state is an internal variable, copied to the output `state` at the end | a block that reads its own output gets the TIA warning "might not be initialized"; outputs are now write-only |
+| TP comments are at most 32 characters | the controller cut a longer comment when it translated the file; the listing is now identical to the source |
+| The zone that gives "mould area free" starts with a margin beyond the start position | on the virtual controller a joint move back to the start position clipped a zone plane 5 mm beyond it |
 | P2 limit left open | a fix needs a second mould-open signal or timing, both outside the EUROMAP 67 signal set and this model |
 
 ## 14. References

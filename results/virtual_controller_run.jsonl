@@ -1,0 +1,190 @@
+{"t":3.141,"tc":0,"note":"controller software V9.40396 8/2/2024, arm M-710iD"}
+{"t":6.078,"tc":0,"note":"text of user alarm 1 set: True"}
+{"t":6.35,"tc":0,"note":"position registers kept from an earlier run"}
+{"message":"","t":7.056,"tc":0,"ftp_put":"UNLOAD_IMM.ls","exit":0}
+{"t":8.096,"tc":0,"note":"program UNLOAD_IMM started through the PC interface"}
+{"t":0,"tc":0,"note":"robot at the start position; machine model and PLC block running"}
+{"t":0.109,"tc":585341,"chg":{"task":0,"CUT_DONE":0,"ZB4":0,"RI1_PART_OK":0,"ZB3":1,"MOULD_OPEN":0,"B4":0,"ejector":"BACK","REQ_EJ_FWD":0,"MAF":1,"mould":"CLOSED","p2":0,"A6":0,"plc":"S_MOULDING","MOULD_CLOSED":0,"ZA6":1,"DO10_MOULD_AREA_FREE":1,"pos":"WAIT_IMM","CYCLE_ENABLE":1,"AT_CUT":0,"ZA7":0,"REQ_CLOSE":0,"line":25,"plc_fault":"none","IMM_AUTO":1,"B3":0,"RO1_VACUUM":0,"FAULT":0,"PLACE_FREE":1,"p1":0,"PLACED":0,"PLACE_ACK":0,"REQ_EJ_BACK":0},"dxyz":[0.0,0.1,0.0]}
+{"t":6.169,"tc":589550,"chg":{"ZA6":0,"mould":"OPENING"},"dxyz":[0.0,0.1,0.0]}
+{"t":6.169,"tm":6.005,"tc":589550,"machine":"imm:process_done"}
+{"t":6.169,"tm":6.005,"tc":589550,"machine":"imm:open_start"}
+{"t":8.417,"tc":590115,"chg":{"mould":"OPEN","MOULD_OPEN":1,"line":31,"ZA7":1,"plc":"S_OPEN"},"dxyz":[0.0,0.1,0.0]}
+{"t":8.418,"tm":8.215,"tc":590115,"machine":"imm:open_done"}
+{"t":8.783,"tc":590269,"chg":{"pos":"MOULD_IN","DO10_MOULD_AREA_FREE":0,"plc":"S_UNLOAD","MAF":0},"dxyz":[34.3,0.1,0.0]}
+{"t":9.867,"tc":590602,"chg":{"line":32},"dxyz":[499.6,0.1,0.0]}
+{"t":10.255,"tc":590795,"chg":{"line":35},"dxyz":[500.0,86.9,0.0]}
+{"t":10.314,"tc":590833,"chg":{"REQ_EJ_FWD":1,"RO1_VACUUM":1,"B4":1,"pos":"GRIP"},"dxyz":[500.0,90.1,0.0]}
+{"t":10.669,"tc":591019,"chg":{"RI1_PART_OK":1},"dxyz":[500.0,90.1,0.0]}
+{"t":10.671,"tm":10.446,"tc":591019,"machine":"cell:part_gripped"}
+{"t":10.775,"tc":591084,"chg":{"line":38,"ejector":"FWD","ZB4":1,"ZB3":0},"dxyz":[500.0,90.1,0.0]}
+{"t":10.776,"tm":10.612,"tc":591084,"machine":"imm:ej_fwd_done"}
+{"t":10.825,"tc":591165,"chg":{"REQ_EJ_FWD":0,"B4":0,"pos":"MOULD_IN"},"dxyz":[500.0,85.7,0.0]}
+{"t":11.11,"tc":591285,"chg":{"line":40},"dxyz":[500.0,3.9,0.0]}
+{"t":11.155,"tc":591332,"chg":{"B3":1,"REQ_EJ_BACK":1},"dxyz":[500.0,0.1,0.0]}
+{"t":11.804,"tc":591535,"chg":{"ejector":"BACK","ZB4":0,"ZB3":1},"dxyz":[275.2,0.1,0.0]}
+{"t":11.806,"tm":11.387,"tc":591535,"machine":"imm:ej_back_done"}
+{"t":12.102,"tc":591711,"chg":{"pos":"WAIT_IMM","DO10_MOULD_AREA_FREE":1,"line":49,"MAF":1},"dxyz":[7.9,0.1,0.0]}
+{"t":12.347,"tc":591872,"chg":{"A6":1,"REQ_CLOSE":1,"B3":0,"ZA7":0,"REQ_EJ_BACK":0,"MOULD_OPEN":0,"mould":"CLOSING","plc":"S_CLOSE"},"dxyz":[-22.9,38.3,-1.4]}
+{"t":12.35,"tm":11.823,"tc":591872,"machine":"imm:close_start"}
+{"t":12.358,"tc":591872,"note":"closure 1 enabled (A6), phase normal"}
+{"t":12.606,"tc":592052,"chg":{"line":51},"dxyz":[-281.2,334.8,-89.4]}
+{"t":12.869,"tc":592150,"chg":{"AT_CUT":1},"dxyz":[-300.0,350.1,-100.0]}
+{"t":12.948,"tm":12.691,"tc":592314,"machine":"cell:cutter_closed"}
+{"t":13.203,"tc":592421,"chg":{"line":54,"CUT_DONE":1},"dxyz":[-300.0,350.1,-100.0]}
+{"t":13.206,"tm":13.002,"tc":592421,"machine":"cell:cutter_open"}
+{"t":13.303,"tc":592481,"chg":{"AT_CUT":0,"CUT_DONE":0},"dxyz":[-299.5,351.5,-99.7]}
+{"t":13.697,"tc":592711,"chg":{"line":55},"dxyz":[-295.9,887.8,-2.1]}
+{"t":14.215,"tc":592956,"chg":{"line":57,"RO1_VACUUM":0},"dxyz":[-300.0,900.1,-167.9]}
+{"t":14.288,"tc":593082,"chg":{"pos":"PLACE","PLACE_FREE":0,"RI1_PART_OK":0,"line":58},"dxyz":[-300.0,900.1,-200.0]}
+{"t":14.289,"tm":14.086,"tc":593082,"machine":"cell:part_released"}
+{"t":14.366,"tc":593132,"chg":{"ZA6":1,"mould":"CLOSED","MOULD_CLOSED":1,"A6":0,"plc":"S_MOULDING"},"dxyz":[-300.0,900.1,-199.8]}
+{"t":14.367,"tm":14.23,"tc":593132,"machine":"imm:close_done"}
+{"t":14.429,"tc":593179,"chg":{"pos":"WAIT_IMM"},"dxyz":[-300.0,900.1,-185.1]}
+{"t":14.769,"tc":593335,"chg":{"line":60},"dxyz":[-300.0,900.1,-2.7]}
+{"t":14.831,"tc":593394,"chg":{"line":65,"PLACED":1,"PLACE_ACK":1},"dxyz":[-300.0,900.1,0.0]}
+{"t":14.9,"tc":593448,"chg":{"MOULD_CLOSED":0,"PLACED":0,"REQ_CLOSE":0,"line":66},"dxyz":[-300.0,900.1,0.0]}
+{"t":15.841,"tc":593817,"chg":{"line":25},"dxyz":[1.0,7.5,0.4]}
+{"t":16.571,"tc":594004,"chg":{"PLACE_ACK":0,"PLACE_FREE":1},"dxyz":[0.0,0.1,0.0]}
+{"t":16.573,"tm":16.298,"tc":594004,"machine":"cell:conveyor_indexed"}
+{"t":20.315,"tc":596015,"chg":{"ZA6":0,"mould":"OPENING"},"dxyz":[0.0,0.1,0.0]}
+{"t":20.317,"tm":20.237,"tc":596015,"machine":"imm:process_done"}
+{"t":20.318,"tm":20.237,"tc":596015,"machine":"imm:open_start"}
+{"t":22.672,"tc":597461,"chg":{"mould":"OPEN","MOULD_OPEN":1,"line":31,"ZA7":1,"plc":"S_OPEN"},"dxyz":[0.0,0.1,0.0]}
+{"t":22.674,"tm":22.444,"tc":597461,"machine":"imm:open_done"}
+{"t":23.274,"tc":597648,"chg":{"pos":"MOULD_IN","DO10_MOULD_AREA_FREE":0,"plc":"S_UNLOAD","MAF":0},"dxyz":[73.1,0.1,0.0]}
+{"t":23.756,"tc":597966,"chg":{"line":32},"dxyz":[500.0,0.1,0.0]}
+{"t":24.188,"tc":598170,"chg":{"line":35,"pos":"GRIP"},"dxyz":[500.0,90.1,0.0]}
+{"t":24.27,"tc":598195,"chg":{"REQ_EJ_FWD":1,"RO1_VACUUM":1,"B4":1},"dxyz":[500.0,90.1,0.0]}
+{"t":24.34,"tc":598253,"chg":{"RI1_PART_OK":1},"dxyz":[500.0,90.1,0.0]}
+{"t":24.341,"tm":24.242,"tc":598253,"machine":"cell:part_gripped"}
+{"t":24.592,"tc":598355,"chg":{"line":38,"ejector":"FWD","ZB4":1,"ZB3":0},"dxyz":[500.0,90.1,0.0]}
+{"t":24.598,"tm":24.404,"tc":598355,"machine":"imm:ej_fwd_done"}
+{"t":24.905,"tc":598468,"chg":{"REQ_EJ_FWD":0,"B4":0,"pos":"MOULD_IN"},"dxyz":[500.0,79.8,0.0]}
+{"t":25.415,"tc":598566,"chg":{"line":40,"B3":1,"REQ_EJ_BACK":1},"dxyz":[500.0,7.5,0.0]}
+{"t":25.563,"tc":598646,"chg":{"ejector":"BACK","ZB4":0,"ZB3":1},"dxyz":[497.2,0.1,0.0]}
+{"t":25.564,"tm":25.326,"tc":598646,"machine":"imm:ej_back_done"}
+{"t":26.777,"tc":598978,"chg":{"pos":"WAIT_IMM","DO10_MOULD_AREA_FREE":1,"MAF":1},"dxyz":[7.9,0.1,0.0]}
+{"t":27.044,"tc":599030,"chg":{"line":49,"A6":1,"REQ_CLOSE":1,"B3":0,"ZA7":0,"REQ_EJ_BACK":0,"MOULD_OPEN":0,"mould":"CLOSING","plc":"S_CLOSE"},"dxyz":[0.0,0.1,0.0]}
+{"t":27.045,"tm":26.648,"tc":599030,"machine":"imm:close_start"}
+{"t":27.048,"tc":599030,"note":"closure 2 enabled (A6), phase normal"}
+{"t":27.527,"tc":599267,"chg":{"line":51},"dxyz":[-235.9,295.0,-65.9]}
+{"t":27.679,"tc":599408,"chg":{"AT_CUT":1},"dxyz":[-300.0,350.1,-100.0]}
+{"t":27.745,"tm":27.58,"tc":599519,"machine":"cell:cutter_closed"}
+{"t":28.157,"tc":599735,"chg":{"line":54,"CUT_DONE":1},"dxyz":[-300.0,350.1,-100.0]}
+{"t":28.158,"tm":27.892,"tc":599735,"machine":"cell:cutter_open"}
+{"t":28.401,"tc":599943,"chg":{"AT_CUT":0,"CUT_DONE":0},"dxyz":[-273.1,445.3,-80.8]}
+{"t":28.644,"tc":600078,"chg":{"line":55},"dxyz":[-295.4,886.2,-2.4]}
+{"t":28.999,"tc":600349,"chg":{"pos":"PLACE","RO1_VACUUM":0,"line":57},"dxyz":[-300.0,900.1,-198.1]}
+{"t":29.359,"tc":600546,"chg":{"PLACE_FREE":0,"RI1_PART_OK":0,"line":58},"dxyz":[-300.0,900.1,-200.0]}
+{"t":29.361,"tm":28.862,"tc":600546,"machine":"cell:part_released"}
+{"t":29.649,"tc":600777,"chg":{"A6":0,"pos":"WAIT_IMM","ZA6":1,"MOULD_CLOSED":1,"mould":"CLOSED","plc":"S_MOULDING"},"dxyz":[-300.0,900.1,-150.1]}
+{"t":29.654,"tm":29.052,"tc":600777,"machine":"imm:close_done"}
+{"t":30.066,"tc":600901,"chg":{"line":60},"dxyz":[-300.0,900.1,-0.7]}
+{"t":30.138,"tc":600959,"chg":{"line":65,"PLACED":1,"PLACE_ACK":1},"dxyz":[-300.0,900.1,0.0]}
+{"t":30.189,"tc":601011,"chg":{"MOULD_CLOSED":0,"PLACED":0,"REQ_CLOSE":0,"line":66},"dxyz":[-300.0,900.1,0.0]}
+{"t":30.944,"tc":601376,"chg":{"line":25},"dxyz":[0.4,3.2,0.1]}
+{"t":32.088,"tc":601706,"chg":{"PLACE_ACK":0,"PLACE_FREE":1},"dxyz":[0.0,0.1,0.0]}
+{"t":32.09,"tm":31.596,"tc":601706,"machine":"cell:conveyor_indexed"}
+{"t":35.441,"tc":603510,"chg":{"ZA6":0,"mould":"OPENING"},"dxyz":[0.0,0.1,0.0]}
+{"t":35.444,"tm":35.053,"tc":603510,"machine":"imm:process_done"}
+{"t":35.445,"tm":35.053,"tc":603510,"machine":"imm:open_start"}
+{"t":37.461,"tc":604501,"chg":{"mould":"OPEN","MOULD_OPEN":1,"line":31,"ZA7":1,"plc":"S_OPEN"},"dxyz":[0.0,0.1,0.0]}
+{"t":37.462,"tm":37.259,"tc":604501,"machine":"imm:open_done"}
+{"t":37.836,"tc":604662,"chg":{"pos":"MOULD_IN","DO10_MOULD_AREA_FREE":0,"plc":"S_UNLOAD","MAF":0},"dxyz":[32.5,0.1,0.0]}
+{"t":38.192,"tc":605026,"chg":{"line":32},"dxyz":[500.0,0.1,0.0]}
+{"t":38.607,"tc":605184,"chg":{"line":35},"dxyz":[500.0,85.7,0.0]}
+{"t":38.692,"tc":605304,"chg":{"REQ_EJ_FWD":1,"RO1_VACUUM":1,"B4":1,"pos":"GRIP"},"dxyz":[500.0,90.1,0.0]}
+{"t":38.78,"tc":605370,"chg":{"RI1_PART_OK":1},"dxyz":[500.0,90.1,0.0]}
+{"t":38.781,"tm":38.643,"tc":605370,"machine":"cell:part_gripped"}
+{"t":39.071,"tc":605475,"chg":{"line":38,"ejector":"FWD","ZB4":1,"ZB3":0},"dxyz":[500.0,90.1,0.0]}
+{"t":39.076,"tm":38.807,"tc":605475,"machine":"imm:ej_fwd_done"}
+{"t":39.159,"tc":605609,"chg":{"REQ_EJ_FWD":0,"B4":0,"pos":"MOULD_IN"},"dxyz":[500.0,47.7,0.0]}
+{"t":39.353,"tc":605694,"chg":{"line":40},"dxyz":[500.0,0.4,0.0]}
+{"t":39.409,"tc":605740,"chg":{"B3":1,"REQ_EJ_BACK":1},"dxyz":[498.9,0.1,0.0]}
+{"t":40.006,"tc":605922,"chg":{"ejector":"BACK","ZB4":0,"ZB3":1},"dxyz":[261.5,0.1,0.0]}
+{"t":40.008,"tm":39.656,"tc":605922,"machine":"imm:ej_back_done"}
+{"t":40.391,"tc":606097,"chg":{"pos":"WAIT_IMM","DO10_MOULD_AREA_FREE":1,"MAF":1},"dxyz":[2.4,0.1,0.0]}
+{"t":40.64,"tc":606132,"chg":{"line":49},"dxyz":[0.0,0.1,0.0]}
+{"t":40.929,"tc":606156,"chg":{"A6":1,"REQ_CLOSE":1,"B3":0,"ZA7":0,"REQ_EJ_BACK":0,"MOULD_OPEN":0,"mould":"CLOSING","plc":"S_CLOSE"},"dxyz":[0.0,0.2,0.0]}
+{"t":40.93,"tm":40.415,"tc":606156,"machine":"imm:close_start"}
+{"t":40.931,"tc":606156,"note":"closure 3 enabled (A6), phase normal"}
+{"t":42.522,"tc":606482,"chg":{"AT_CUT":1,"line":51},"dxyz":[-295.8,346.8,-97.6]}
+{"t":42.524,"tm":42.094,"tc":606482,"machine":"cell:cutter_closed"}
+{"t":42.661,"tc":606632,"chg":{"line":54,"CUT_DONE":1},"dxyz":[-300.0,350.1,-100.0]}
+{"t":42.663,"tm":42.405,"tc":606632,"machine":"cell:cutter_open"}
+{"t":42.764,"tc":606708,"chg":{"AT_CUT":0,"CUT_DONE":0},"dxyz":[-299.9,350.4,-99.9]}
+{"t":43.445,"tc":606795,"chg":{"ZA6":1,"mould":"CLOSED","MOULD_CLOSED":1,"A6":0,"plc":"S_MOULDING"},"dxyz":[-275.5,434.7,-82.9]}
+{"t":43.446,"tm":42.823,"tc":606795,"machine":"imm:close_done"}
+{"t":43.45,"tc":606795,"note":"scenario: the mould is kept closed for 12 s (mould open never comes)"}
+{"t":44.253,"tc":606995,"chg":{"line":55},"dxyz":[-299.6,898.9,-0.2]}
+{"t":44.871,"tc":607146,"chg":{"line":57},"dxyz":[-300.0,900.1,-129.8]}
+{"t":45.132,"tc":607281,"chg":{"pos":"PLACE","RO1_VACUUM":0,"PLACE_FREE":0,"RI1_PART_OK":0,"line":58},"dxyz":[-300.0,900.1,-200.0]}
+{"t":45.134,"tm":44.793,"tc":607281,"machine":"cell:part_released"}
+{"t":45.77,"tc":607389,"chg":{"pos":"WAIT_IMM"},"dxyz":[-300.0,900.1,-170.2]}
+{"t":46.589,"tc":607557,"chg":{"line":65,"PLACED":1,"PLACE_ACK":1},"dxyz":[-300.0,900.1,0.0]}
+{"t":47.014,"tc":607831,"chg":{"MOULD_CLOSED":0,"PLACED":0,"REQ_CLOSE":0,"line":66},"dxyz":[-300.0,900.1,0.0]}
+{"t":47.665,"tc":608276,"chg":{"line":25},"dxyz":[7.5,68.8,3.1]}
+{"t":47.92,"tc":608442,"chg":{"PLACE_ACK":0,"PLACE_FREE":1},"dxyz":[0.0,0.1,0.0]}
+{"t":47.922,"tm":47.693,"tc":608442,"machine":"cell:conveyor_indexed"}
+{"t":49.042,"tm":48.829,"tc":609001,"machine":"imm:process_done"}
+{"t":61.452,"tc":616276,"note":"scenario: mould released, robot was at line 25 the whole time: WAIT_IMM"}
+{"t":61.784,"tc":616335,"chg":{"ZA6":0,"mould":"OPENING"},"dxyz":[0.0,0.1,0.0]}
+{"t":61.791,"tm":61.298,"tc":616335,"machine":"imm:open_start"}
+{"t":63.756,"tc":617335,"chg":{"mould":"OPEN","MOULD_OPEN":1,"line":31,"ZA7":1,"plc":"S_OPEN"},"dxyz":[0.0,0.1,0.0]}
+{"t":63.758,"tm":63.5,"tc":617335,"machine":"imm:open_done"}
+{"t":64.197,"tc":617477,"chg":{"pos":"MOULD_IN","DO10_MOULD_AREA_FREE":0,"plc":"S_UNLOAD","MAF":0},"dxyz":[34.3,0.1,0.0]}
+{"t":65.755,"tc":617819,"chg":{"line":32},"dxyz":[499.9,0.1,0.0]}
+{"t":66.512,"tc":618038,"chg":{"REQ_EJ_FWD":1,"RO1_VACUUM":1,"B4":1,"pos":"GRIP","line":35},"dxyz":[500.0,90.0,0.0]}
+{"t":66.656,"tc":618077,"chg":{"RI1_PART_OK":1},"dxyz":[500.0,90.1,0.0]}
+{"t":66.658,"tm":66.505,"tc":618077,"machine":"cell:part_gripped"}
+{"t":66.755,"tc":618110,"chg":{"line":38,"ejector":"FWD","ZB4":1,"ZB3":0},"dxyz":[500.0,90.1,0.0]}
+{"t":66.757,"tm":66.659,"tc":618110,"machine":"imm:ej_fwd_done"}
+{"t":66.978,"tc":618162,"chg":{"B4":0,"REQ_EJ_FWD":0},"dxyz":[500.0,89.9,0.0]}
+{"t":67.219,"tc":618204,"chg":{"pos":"MOULD_IN"},"dxyz":[500.0,78.7,0.0]}
+{"t":67.722,"tc":618319,"chg":{"line":40},"dxyz":[500.0,1.4,0.0]}
+{"t":67.936,"tc":618364,"chg":{"B3":1,"REQ_EJ_BACK":1},"dxyz":[500.0,0.1,0.0]}
+{"t":68.14,"tc":618406,"chg":{"ejector":"BACK","ZB4":0,"ZB3":1},"dxyz":[495.4,0.1,0.0]}
+{"t":68.142,"tm":67.9,"tc":618406,"machine":"imm:ej_back_done"}
+{"t":69.06,"tc":618730,"chg":{"pos":"WAIT_IMM","DO10_MOULD_AREA_FREE":1,"MAF":1},"dxyz":[5.2,0.1,0.0]}
+{"t":69.257,"tc":618780,"chg":{"line":49,"A6":1,"REQ_CLOSE":1,"B3":0,"ZA7":0,"REQ_EJ_BACK":0,"MOULD_OPEN":0,"mould":"CLOSING","plc":"S_CLOSE"},"dxyz":[0.0,0.1,0.0]}
+{"t":69.257,"tm":68.891,"tc":618780,"machine":"imm:close_start"}
+{"t":69.258,"tc":618780,"note":"closure 4 enabled (A6), phase one_more"}
+{"t":70.175,"tc":619123,"chg":{"AT_CUT":1,"line":51},"dxyz":[-300.0,350.1,-100.0]}
+{"t":70.483,"tm":70.46,"tc":619301,"machine":"cell:cutter_closed"}
+{"t":70.796,"tc":619570,"chg":{"line":54,"CUT_DONE":1},"dxyz":[-300.0,350.1,-100.0]}
+{"t":70.796,"tm":70.778,"tc":619570,"machine":"cell:cutter_open"}
+{"t":70.819,"tc":619585,"chg":{"AT_CUT":0,"CUT_DONE":0},"dxyz":[-300.0,350.1,-100.0]}
+{"t":71.351,"tc":619824,"chg":{"ZA6":1,"mould":"CLOSED","MOULD_CLOSED":1,"A6":0,"plc":"S_MOULDING"},"dxyz":[-292.2,876.0,-4.1]}
+{"t":71.352,"tm":71.295,"tc":619824,"machine":"imm:close_done"}
+{"t":71.354,"tc":619824,"note":"scenario: the ejector will not move forward (WAIT time-out path)"}
+{"t":71.484,"tc":619880,"chg":{"line":55},"dxyz":[-300.0,900.1,0.0]}
+{"t":72.508,"tc":620122,"chg":{"pos":"PLACE","RO1_VACUUM":0,"line":57},"dxyz":[-300.0,900.1,-199.9]}
+{"t":72.837,"tc":620190,"chg":{"PLACE_FREE":0,"RI1_PART_OK":0,"line":58},"dxyz":[-300.0,900.1,-200.0]}
+{"t":72.838,"tm":72.516,"tc":620190,"machine":"cell:part_released"}
+{"t":72.998,"tc":620294,"chg":{"pos":"WAIT_IMM"},"dxyz":[-300.0,900.1,-180.2]}
+{"t":73.282,"tc":620442,"chg":{"line":60},"dxyz":[-300.0,900.1,-3.8]}
+{"t":73.349,"tc":620485,"chg":{"line":65,"PLACED":1,"PLACE_ACK":1},"dxyz":[-300.0,900.1,0.0]}
+{"t":73.434,"tc":620537,"chg":{"MOULD_CLOSED":0,"PLACED":0,"REQ_CLOSE":0,"line":66},"dxyz":[-300.0,900.1,0.0]}
+{"t":74.617,"tc":620935,"chg":{"line":25},"dxyz":[0.0,0.1,0.0]}
+{"t":74.962,"tc":621110,"chg":{"PLACE_ACK":0,"PLACE_FREE":1},"dxyz":[0.0,0.1,0.0]}
+{"t":74.964,"tm":74.805,"tc":621110,"machine":"cell:conveyor_indexed"}
+{"t":77.676,"tc":622056,"chg":{"ZA6":0,"mould":"OPENING"},"dxyz":[0.0,0.1,0.0]}
+{"t":77.678,"tm":77.305,"tc":622056,"machine":"imm:process_done"}
+{"t":77.683,"tm":77.305,"tc":622056,"machine":"imm:open_start"}
+{"t":79.84,"tc":622768,"chg":{"mould":"OPEN","MOULD_OPEN":1,"line":31,"ZA7":1,"plc":"S_OPEN"},"dxyz":[0.0,0.1,0.0]}
+{"t":79.841,"tm":79.509,"tc":622768,"machine":"imm:open_done"}
+{"t":80.064,"tc":622925,"chg":{"pos":"MOULD_IN","DO10_MOULD_AREA_FREE":0,"plc":"S_UNLOAD","MAF":0},"dxyz":[30.7,0.1,0.0]}
+{"t":81.15,"tc":623282,"chg":{"line":32},"dxyz":[500.0,0.1,0.0]}
+{"t":81.797,"tc":623469,"chg":{"pos":"GRIP"},"dxyz":[500.0,89.6,0.0]}
+{"t":82.042,"tc":623506,"chg":{"REQ_EJ_FWD":1,"RO1_VACUUM":1,"B4":1,"line":35},"dxyz":[500.0,90.1,0.0]}
+{"t":82.157,"tc":623559,"chg":{"RI1_PART_OK":1},"dxyz":[500.0,90.1,0.0]}
+{"t":82.158,"tm":81.946,"tc":623559,"machine":"cell:part_gripped"}
+{"t":87.842,"tc":625978,"chg":{"CYCLE_ENABLE":0,"plc_fault":"F_ROBOT","plc":"S_FAULT","line":73,"MOULD_OPEN":0,"task":1,"B4":0,"FAULT":1,"IMM_AUTO":0},"dxyz":[500.0,90.1,0.0]}
+{"t":87.858,"tc":625978,"note":"robot reports FAULT (DO[6]) at line 73"}
+{"t":88.013,"tc":626078,"chg":{"REQ_EJ_FWD":0},"dxyz":[500.0,90.1,0.0]}
+{"t":90.7,"tc":627384,"note":"end: task line 73 status 1"}
+{"alarm":"INTP-213 UNLOAD_IMM handshake fault (UNLOAD_IMM, 72) UALM[1]","t":91.064,"tc":627384,"cause":""}
+{"alarm":"INTP-105 (UNLOAD_IMM, 1) Run request failed","t":91.109,"tc":627384,"cause":"system is in error status"}
+{"alarm":"INTP-213 UNLOAD_IMM handshake fault (UNLOAD_IMM, 72) UALM[1]","t":91.125,"tc":627384,"cause":""}
+{"alarm":"ASBN-008 file 'UNLOAD_IMM'","t":91.177,"tc":627384,"cause":""}
+{"t":91.358,"tc":627384,"meta":{"program":"UNLOAD_IMM","software":"V9.40396 8/2/2024","hold_open_s":12,"layout_offsets_mm":{"HOME":[-100,0,100],"WAIT_IMM":[0,0,0],"MOULD_IN":[500,0,0],"GRIP":[500,90,0],"CUT":[-300,350,-100],"PLACE_APPR":[-300,900,0],"PLACE":[-300,900,-200]},"arm":"M-710iD","zone_margin_mm":30,"process_time_s":6,"cycles":3}}
