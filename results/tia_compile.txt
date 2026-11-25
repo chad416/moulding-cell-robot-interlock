@@ -1,24 +1,9 @@
-﻿TIA Portal V18, CPU OrderNumber:6ES7 513-1AL02-0AB0/V2.9, 2026-11-25 03:36
+﻿TIA Portal V18, CPU OrderNumber:6ES7 513-1AL02-0AB0/V2.9, 2026-11-25 04:07
 generated CellPlc
-COMPILE Warning  errors=0  warnings=14
-  Warning  PLC_1  
-    Warning  Program blocks  
+COMPILE Success  errors=0  warnings=0
+  Success  PLC_1  
+    Success  Program blocks  
       Success  Main (OB1)  Block was successfully compiled.
-      Warning  CELL_PLC (FB1)  
-        Warning  9  The parameter '#state' might not be initialized.
-        Warning  9  The parameter '#state' might not be initialized.
-        Warning  10  The parameter '#state' might not be initialized.
-        Warning  23  The parameter '#state' might not be initialized.
-        Warning  98  The parameter '#state' might not be initialized.
-        Warning  98  The parameter '#state' might not be initialized.
-        Warning  98  The parameter '#state' might not be initialized.
-        Warning  98  The parameter '#state' might not be initialized.
-        Warning  101  The parameter '#state' might not be initialized.
-        Warning  102  The parameter '#state' might not be initialized.
-        Warning  103  The parameter '#state' might not be initialized.
-        Warning  108  The parameter '#state' might not be initialized.
-        Warning  108  The parameter '#state' might not be initialized.
-        Warning  135  The parameter '#state' might not be initialized.
-        Success    Block was successfully compiled.
-  Warning    Compiling finished (errors: 0; warnings: 14)
+      Success  CELL_PLC (FB1)  Block was successfully compiled.
+  Success    Compiling finished (errors: 0; warnings: 0)
 

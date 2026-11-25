@@ -20,6 +20,7 @@ $ErrorActionPreference = "Stop"
 $Blocks = @($Blocks | ForEach-Object { $_ -split "," } | ForEach-Object { $_.Trim() } | Where-Object { $_ })
 $root = Split-Path -Parent $PSScriptRoot
 if ($PlcDir -eq "") { $PlcDir = Join-Path $root "plc" }
+$PlcDir = (Resolve-Path $PlcDir).Path   # TIA Portal runs in its own process: it needs a full path
 if ($ResultFile -eq "") { $ResultFile = Join-Path $root "results\tia_compile.txt" }
 $api = "C:\Program Files\Siemens\Automation\Portal $Version\PublicAPI\$Version\Siemens.Engineering.dll"
 if (-not (Test-Path $api)) { throw "Openness API not found: $api" }

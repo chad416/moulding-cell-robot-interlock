@@ -90,6 +90,7 @@ VAR
   mouldOpen : BOOL;
   running : BOOL;
   newFault : INT;
+  seq : INT;                   (* sequence state; copied to the output 'state' at the end *)
 END_VAR
 
   mouldOpen := iZA7_MouldOpenPosition AND NOT iZA6_MouldClosed;
@@ -99,8 +100,8 @@ END_VAR
 
   (* supervision, valid in every running state *)
   newFault := 0;
-  IF state <> S_FAULT AND state <> S_INIT THEN
-    IF NOT iSafetyOk AND state <> S_ACCESS THEN
+  IF seq <> S_FAULT AND seq <> S_INIT THEN
+    IF NOT iSafetyOk AND seq <> S_ACCESS THEN
       newFault := F_SAFETY;
     ELSIF rbFault THEN
       newFault := F_ROBOT;
@@ -111,16 +112,16 @@ END_VAR
 
   IF newFault <> 0 THEN
     faultCode := newFault;
-    state := S_FAULT;
+    seq := S_FAULT;
   ELSE
-    CASE state OF
+    CASE seq OF
       0: (* S_INIT: start only from a clean handshake *)
         IF iSafetyOk AND iGateClosedLocked AND rbAreaFree AND NOT rbReqClose AND NOT rbFault THEN
           closedAck := FALSE;
           accessEnd := FALSE;
           gateReq := FALSE;
           faultCode := 0;
-          state := S_MOULDING;
+          seq := S_MOULDING;
         END_IF;
 
       1: (* S_MOULDING: mould closed or moving, robot outside *)
@@ -128,46 +129,46 @@ END_VAR
           closedAck := FALSE;
         ELSIF gateReq AND rbAtWait AND rbAreaFree AND NOT closedAck THEN
           accessEnd := FALSE;
-          state := S_ACCESS;
+          seq := S_ACCESS;
         ELSIF mouldOpen AND NOT rbReqClose AND NOT closedAck THEN
-          state := S_OPEN;
+          seq := S_OPEN;
         END_IF;
 
       2: (* S_OPEN: mould at the open position, robot at its start position *)
         IF NOT rbAreaFree THEN
-          state := S_UNLOAD;
+          seq := S_UNLOAD;
         ELSIF NOT mouldOpen THEN
           faultCode := F_SEQUENCE;
-          state := S_FAULT;
+          seq := S_FAULT;
         ELSIF gateReq AND rbAtWait THEN
           accessEnd := FALSE;
-          state := S_ACCESS;
+          seq := S_ACCESS;
         END_IF;
 
       3: (* S_UNLOAD: robot in the mould area *)
         IF NOT mouldOpen THEN
           faultCode := F_SEQUENCE;
-          state := S_FAULT;
+          seq := S_FAULT;
         ELSIF rbAreaFree AND rbReqClose AND iZB3_EjectorBack THEN
           tmo := 0;
-          state := S_CLOSE;
+          seq := S_CLOSE;
         END_IF;
 
       4: (* S_CLOSE: A6 is on until the machine reports Mould closed *)
         IF iZA6_MouldClosed THEN
           closedAck := TRUE;
-          state := S_MOULDING;
+          seq := S_MOULDING;
         ELSIF NOT rbAreaFree THEN
           faultCode := F_AREA;
-          state := S_FAULT;
+          seq := S_FAULT;
         ELSIF NOT rbReqClose THEN
           faultCode := F_SEQUENCE;
-          state := S_FAULT;
+          seq := S_FAULT;
         ELSIF cfgCloseTmoScans > 0 THEN
           tmo := tmo + 1;
           IF tmo > cfgCloseTmoScans THEN
             faultCode := F_CLOSE_TMO;
-            state := S_FAULT;
+            seq := S_FAULT;
           END_IF;
         END_IF;
 
@@ -178,27 +179,27 @@ END_VAR
         IF accessEnd AND iGateClosedLocked AND iSafetyOk THEN
           gateReq := FALSE;
           accessEnd := FALSE;
-          state := S_MOULDING;
+          seq := S_MOULDING;
         END_IF;
 
       9: (* S_FAULT: every enable is off; restart only from a clean handshake *)
         IF btnReset AND iSafetyOk AND iGateClosedLocked AND rbAreaFree AND NOT rbReqClose AND NOT rbFault THEN
-          state := S_INIT;
+          seq := S_INIT;
         END_IF;
     END_CASE;
   END_IF;
 
-  running := state = S_MOULDING OR state = S_OPEN OR state = S_UNLOAD OR state = S_CLOSE;
+  running := seq = S_MOULDING OR seq = S_OPEN OR seq = S_UNLOAD OR seq = S_CLOSE;
 
   (* EUROMAP 67 outputs *)
-  qA6_EnableMouldClosure := state = S_CLOSE AND rbReqClose AND rbAreaFree AND iZB3_EjectorBack AND iSafetyOk;
-  qB4_EnableEjectorForward := state = S_UNLOAD AND rbReqEjFwd AND mouldOpen AND NOT rbAreaFree;
-  qB3_EnableEjectorBack := state = S_UNLOAD AND rbReqEjBack;
+  qA6_EnableMouldClosure := seq = S_CLOSE AND rbReqClose AND rbAreaFree AND iZB3_EjectorBack AND iSafetyOk;
+  qB4_EnableEjectorForward := seq = S_UNLOAD AND rbReqEjFwd AND mouldOpen AND NOT rbAreaFree;
+  qB3_EnableEjectorBack := seq = S_UNLOAD AND rbReqEjBack;
   qB2_NoOperationWithImm := FALSE;
 
   (* to the robot *)
   qRbImmAuto := running AND iZB2_EnableOperation;
-  qRbMouldOpen := (state = S_OPEN OR state = S_UNLOAD) AND mouldOpen;
+  qRbMouldOpen := (seq = S_OPEN OR seq = S_UNLOAD) AND mouldOpen;
   qRbMouldClosed := closedAck;
   qRbEjFwd := iZB4_EjectorForward AND NOT iZB3_EjectorBack;
   qRbEjBack := iZB3_EjectorBack AND NOT iZB4_EjectorForward;
@@ -225,5 +226,8 @@ END_VAR
   qRbPlaceAck := idx;
 
   (* gate *)
-  qGateUnlock := state = S_ACCESS AND NOT accessEnd;
+  qGateUnlock := seq = S_ACCESS AND NOT accessEnd;
+
+  (* outputs are written once and never read back *)
+  state := seq;
 END_FUNCTION_BLOCK

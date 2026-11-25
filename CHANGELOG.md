@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 (2026-11-25)
+- PLC block: the sequence state is an internal variable and is copied to the output `state` at the end, so no
+  output is read back. The SCL export compiles in TIA Portal V18 with 0 errors and 0 warnings
+  (`results/tia_compile.txt`). No result number changed.
+- `scripts/tia_build.ps1` accepts a relative source folder.
+
 ## 1.0.0 (2026-11-25)
 - Cooling time of the handle section (plate relation, finite-difference check), cycle breakdown, annual output.
 - Removal time of a 6-axis robot from joint speed and acceleration limits; trade study against a 3-axis linear robot.

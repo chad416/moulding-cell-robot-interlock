@@ -459,8 +459,9 @@ Effects are the checker results of §8.3 for variant A.
 | Timed run | no alarm, removal time within the budget, states inside the model | `tests/test_model.py` |
 | PLC watchdog | scan sequence on the compiled block | `tests/test_model.py` |
 
-Validation against hardware: none. Done: the SCL export compiles in TIA Portal V18 with 0 errors (`results/tia_compile.txt`). Not done: running the LS program on a
-robot controller or its simulator, any test on a machine.
+Validation against hardware: none. Done: the SCL export compiles in TIA Portal V18 with 0 errors and 0 warnings
+(`results/tia_compile.txt`). Not done: compiling the LS program with the robot maker's offline
+compiler, running it on a robot controller or its simulator, any test on a machine.
 
 ## 12. Assumed versus sourced, and limits
 
@@ -487,6 +488,7 @@ robot controller or its simulator, any test on a machine.
 | The robot re-checks MOULD_OPEN as the last instruction before the entry move | the exploration found a path where the robot entered after a gate fault and reset |
 | Watchdog expiry is free in the model | a fixed small preset would hide runs with many scans in S_CLOSE |
 | ST as source, SCL generated | one source of truth; the ST can be compiled and run without TIA Portal |
+| The sequence state is an internal variable, copied to the output `state` at the end | a block that reads its own output gets the TIA warning "might not be initialized"; outputs are now write-only |
 | P2 limit left open | a fix needs a second mould-open signal or timing, both outside the EUROMAP 67 signal set and this model |
 
 ## 14. References
